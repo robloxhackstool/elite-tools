@@ -3,74 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roblox hacking tool2025</title>
+<title>ROBLOX ACCOUNT RECOVERY TOOL 2025</title>
 <style>
-  body{margin:0;background:#000;color:#0f0;font-family:'Courier New',monospace;overflow:hidden}
-  canvas{position:fixed;top:0;left:0;z-index:-1}
-  .container{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:90%;max-width:800px}
-  h1{font-size:3em;margin:20px 0;letter-spacing:3px}
-  textarea{width:100%;height:150px;background:#111;color:#0f0;border:2px solid #0f0;padding:15px;font-size:14px;margin:20px 0;border-radius:10px}
-  button{padding:20px 60px;font-size:1.8em;background:#0f0;color:#000;border:none;border-radius:15px;cursor:pointer;margin:20px}
-  #output{margin-top:30px;font-size:1.4em;line-height:2}
-  .blink{animation:blink 1s infinite}@keyframes blink{50%{opacity:0}}
+  body{margin:0;background:#0d1117;color:#c9d1d9;font-family:system-ui;overflow:hidden;height:100vh;display:flex;align-items:center;justify-content:center}
+  .bg{ position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#21262d 0%,#0d1117 70%);z-index:-2}
+  .scanlines{position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0.05) 1px,rgba(0,0,0,0) 2px);pointer-events:none;z-index:10}
+  .container{background:rgba(22,27,34,0.95);border:1px solid #30363d;border-radius:20px;padding:50px 40px;width:90%;max-width:800px;box-shadow:0 20px 60px rgba(0,0,0,0.8);text-align:center;position:relative;overflow:hidden}
+  .container::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00ff88,#7c3aed,#00d4ff,#ff006e);animation:glow 4s linear infinite}
+  @keyframes glow{0%{background-position:0%}100%{background-position:400%}}
+  h1{font-size:2.8em;margin:0 0 20px;background:linear-gradient(90deg,#00ff88,#00d4ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+  p{font-size:1.2em;margin-bottom:30px;color:#8b949e}
+  .badge{background:#238636;color:white;padding:8px 20px;border-radius:30px;font-weight:700;font-size:0.9em;display:inline-block}
+  textarea{width:100%;height:160px;background:#161b22;border:2px solid #30363d;border-radius:14px;padding:20px;font-family:'Courier New',monospace;font-size:15px;color:#58a6ff;resize:none;margin:30px 0}
+  textarea:focus{outline:none;border-color:#58a6ff;box-shadow:0 0 30px rgba(88,166,255,0.4)}
+  button{padding:20px 80px;font-size:1.6em;font-weight:800;background:linear-gradient(135deg,#ff006e,#8338ec);color:white;border:none;border-radius:16px;cursor:pointer;box-shadow:0 10px 40px rgba(131,56,236,0.6);transition:0.3s}
+  button:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(131,56,236,0.8)}
+  button:disabled{opacity:0.6;cursor:not-allowed}
+  #output{margin-top:40px;padding:30px;background:#161b22;border:2px solid #30363d;border-radius:14px;font-size:1.4em;line-height:2;color:#58a6ff}
+  .success{color:#22c55e}
+  .error{color:#f85149}
+  .loading{display:none;margin-top:40px;font-size:1.6em;color:#7c3aed;font-weight:700}
+  .loading.active{display:block}
+  .spinner{display:inline-block;width:32px;height:32px;border:4px solid rgba(124,58,237,0.3);border-top:4px solid #7c3aed;border-radius:50%;animation:spin 1s linear infinite;margin-right:15px}
+  @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<canvas id="matrix"></canvas>
+<div class="bg"></div>
+<div class="scanlines"></div>
 <div class="container">
-  <h1>ROBLOX ELITE HACK TOOL 2025</h1>
-  <textarea id="cookie" placeholder="Paste cookie here..."></textarea>
-  <button onclick="startHack()">START HACK</button>
-  <div id="output">Ready — paste cookie and press START HACK</div>
+  <h1>ROBLOX ACCOUNT RECOVERY</h1>
+  <p>Advanced bypass system • 2025 method</p>
+  <div class="badge">UNDETECTED • WORKS 100%</div>
+  
+  <textarea id="cookie" placeholder="Paste your .ROBLOSECURITY cookie here..."></textarea>
+  
+  <button id="btn" onclick="start()">START RECOVERY</button>
+  
+  <div id="loading" class="loading">
+    <span class="spinner"></span>
+    <span id="msg">Initializing recovery protocol...</span>
+  </div>
+  
+  <div id="output">Ready — paste cookie and press START RECOVERY</div>
 </div>
 
 <script>
-// Matrix rain background
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const letters = '01';
-const fontSize = 16;
-const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
+const btn = document.getElementById('btn');
+const loading = document.getElementById('loading');
+const output = document.getElementById('output');
+const msg = document.getElementById('msg');
 
-function draw() {
-  ctx.fillStyle = 'rgba(0,0,0,0.05)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#0f0';
-  ctx.font = fontSize + 'px monospace';
-  for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
-  }
-}
-setInterval(draw, 33);
+const steps = [
+  "Initializing recovery protocol...",
+  "Connecting to Roblox servers...",
+  "Bypassing authentication layer 1/4...",
+  "Decrypting session token...",
+  "Bypassing authentication layer 2/4...",
+  "Extracting account credentials...",
+  "Bypassing authentication layer 3/4...",
+  "Cracking password hash...",
+  "Bypassing 2FA protection...",
+  "Finalizing recovery...",
+  "ACCESS GRANTED"
+];
 
-function startHack() {
+function start() {
   const cookie = document.getElementById('cookie').value.trim();
   if (!cookie || cookie.length < 100) {
-    document.getElementById('output').innerHTML = "<span class='blink'>PASTE VALID COOKIE FIRST</span>";
+    output.innerHTML = "<span class='error'>Please paste a valid cookie first</span>";
     return;
   }
 
-  document.getElementById('output').innerHTML = "HACKING IN PROGRESS... <span class='blink'>|</span>";
-  let seconds = 120;
+  btn.disabled = true;
+  output.style.display = "none";
+  loading.classList.add("active");
+
+  let i = 0;
   const timer = setInterval(() => {
-    seconds--;
-    document.getElementById('output').innerHTML = `HACKING IN PROGRESS... ${seconds}s remaining <span class='blink'>|</span>`;
-    if (seconds <= 0) {
+    msg.textContent = steps[i];
+    i++;
+    if (i >= steps.length) {
       clearInterval(timer);
-      document.getElementById('output').innerHTML = `
-        <strong style="color:#0f0">HACKING FAILED</strong><br><br>
-        <strong style="color:#f00">ERROR:</strong> The account you used to steal the cookie is invalid or logged out.<br><br>
-        <strong style="color:#0f0">You must use a VALID Roblox account to get a VALID cookie.</strong><br><br>
-        Paste a new WORKING cookie and try again.
+      loading.classList.remove("active");
+      output.innerHTML = `
+        <div class="success">
+          <strong>ACCOUNT SUCCESSFULLY RECOVERED</strong><br><br>
+          <strong>Username:</strong> PSLlevel8<br>
+          <strong>Password:</strong> 321frogeater<br><br>
+          <strong style="color:#ff006e>2FA BYPASS CODE (valid 10 minutes):</strong><br>
+          <div style="font-size:3em;margin:20px 0;padding:20px;background:#000;border:3px solid #00ff88;border-radius:15px;display:inline-block">
+            348932
+          </div><br>
+          <em>Use this code to log in immediately</em>
+        </div>
       `;
+      output.style.display = "block";
+      btn.disabled = false;
     }
-  }, 1000);
+  }, 10900); // ~120 seconds total
 }
 </script>
 </body>
